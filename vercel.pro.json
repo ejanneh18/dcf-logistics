@@ -38,10 +38,10 @@
   },
   "functions": {
     "app/api/**/*.ts": {
-      "maxDuration": 10
+      "maxDuration": 30
     },
     "app/api/**/*.js": {
-      "maxDuration": 10
+      "maxDuration": 30
     }
   },
   "headers": [
@@ -108,8 +108,20 @@
   ],
   "crons": [
     {
-      "path": "/api/cron/daily-tasks",
+      "path": "/api/cron/email-queue",
+      "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/cleanup",
       "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/daily-reports",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/backup",
+      "schedule": "0 3 * * 0"
     }
   ]
 }

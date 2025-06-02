@@ -168,10 +168,31 @@ vercel --prod
 ### Performance Optimization
 
 The `vercel.json` file includes:
-- **Function timeouts:** 30 seconds for API routes
+- **Function timeouts:** 10 seconds for Hobby plan, 30 seconds for Pro
 - **Security headers:** XSS protection, frame options
 - **Redirects:** Admin shortcuts
-- **Cron jobs:** Email queue processing
+- **Cron jobs:** Daily tasks (Hobby plan compatible)
+
+### Cron Jobs and Plan Limitations
+
+#### Hobby Plan (Free)
+- **Limitation:** Only daily cron jobs allowed
+- **Configuration:** `vercel.json` (current) - runs daily tasks at 2 AM UTC
+- **Features:** Combined email processing, cleanup, and statistics
+
+#### Pro Plan ($20/month)
+- **Features:** Unlimited cron job frequency
+- **Configuration:** Use `vercel.pro.json` for advanced scheduling
+- **Includes:** Every 5-minute email queue, hourly backups, weekly reports
+
+#### Switching to Pro Plan Features
+```bash
+# To use Pro plan features, replace vercel.json:
+cp vercel.pro.json vercel.json
+git add vercel.json
+git commit -m "Enable Pro plan cron jobs"
+git push
+```
 
 ### Monitoring and Analytics
 
