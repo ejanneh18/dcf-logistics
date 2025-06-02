@@ -1,0 +1,547 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User authentication and roles
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      UserRole @default(CUSTOMER)
+  avatar    String?
+  phone     String?
+  isActive  Boolean  @default(true)
+  lastLoginAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  customer Customer?
+  sessions Session[]
+  auditLogs AuditLog[]
+  createdInvoices Invoice[] @relation("InvoiceCreatedBy")
+  assignedPackages Package[] @relation("PackageAssignedTo")
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// Customer information
+model Customer {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  companyName    String?
+  address        String?
+  city           String?
+  country        String?
+  postalCode     String?
+  taxId          String?
+  creditLimit    Float?
+  paymentTerms   Int?     // Days
+  preferredCurrency String @default("USD")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  shipments Shipment[]
+  quotes    Quote[]
+  invoices  Invoice[]
+  packages  Package[]
+
+  @@map("customers")
+}
+
+// Services management
+model Service {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  category    ServiceCategory
+  basePrice   Float
+  currency    String      @default("USD")
+  isActive    Boolean     @default(true)
+  features    Json?       // JSON array of features
+  regions     String?     // Available regions (JSON string)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relations
+  pricingRules PricingRule[]
+  shipments    Shipment[]
+  quoteItems   QuoteItem[]
+
+  @@map("services")
+}
+
+// Dynamic pricing rules
+model PricingRule {
+  id        String   @id @default(cuid())
+  serviceId String
+  name      String
+  conditions Json    // Pricing conditions (weight, distance, etc.)
+  multiplier Float
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@map("pricing_rules")
+}
+
+// Shipment tracking
+model Shipment {
+  id              String         @id @default(cuid())
+  trackingNumber  String         @unique
+  customerId      String
+  serviceId       String
+  status          ShipmentStatus @default(PENDING)
+  origin          String
+  destination     String
+  weight          Float?
+  dimensions      Json?          // {length, width, height}
+  value           Float?
+  currency        String         @default("USD")
+  totalCost       Float?
+  estimatedDelivery DateTime?
+  actualDelivery  DateTime?
+  deliveredAt     DateTime?
+  notes           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  // Relations
+  customer     Customer           @relation(fields: [customerId], references: [id])
+  service      Service            @relation(fields: [serviceId], references: [id])
+  statusHistory String?           // JSON array of status history
+  documents    ShipmentDocument[]
+  invoice      Invoice?
+
+  @@map("shipments")
+}
+
+// Shipment documents
+model ShipmentDocument {
+  id         String   @id @default(cuid())
+  shipmentId String
+  name       String
+  type       DocumentType
+  url        String
+  size       Int?
+  uploadedAt DateTime @default(now())
+
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  @@map("shipment_documents")
+}
+
+// Quote system
+model Quote {
+  id         String      @id @default(cuid())
+  customerId String
+  status     QuoteStatus @default(PENDING)
+  validUntil DateTime
+  totalAmount Float
+  currency   String      @default("USD")
+  notes      String?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  // Relations
+  customer Customer   @relation(fields: [customerId], references: [id])
+  items    QuoteItem[]
+  invoice  Invoice?
+
+  @@map("quotes")
+}
+
+model QuoteItem {
+  id          String  @id @default(cuid())
+  quoteId     String
+  serviceId   String
+  description String
+  quantity    Int     @default(1)
+  unitPrice   Float
+  totalPrice  Float
+
+  quote   Quote   @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id])
+
+  @@map("quote_items")
+}
+
+// Invoice and payment system
+model Invoice {
+  id            String        @id @default(cuid())
+  invoiceNumber String        @unique
+  customerId    String
+  quoteId       String?       @unique
+  shipmentId    String?       @unique
+  createdById   String?       // Admin who created the invoice
+  status        InvoiceStatus @default(DRAFT)
+  issueDate     DateTime      @default(now())
+  dueDate       DateTime
+  paidDate      DateTime?
+  subtotal      Float
+  taxAmount     Float         @default(0)
+  totalAmount   Float
+  currency      String        @default("USD")
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // Relations
+  customer Customer  @relation(fields: [customerId], references: [id])
+  quote    Quote?    @relation(fields: [quoteId], references: [id])
+  shipment Shipment? @relation(fields: [shipmentId], references: [id])
+  createdBy User?    @relation("InvoiceCreatedBy", fields: [createdById], references: [id])
+  items    InvoiceItem[]
+  payments Payment[]
+  packages Package[]
+
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          String  @id @default(cuid())
+  invoiceId   String
+  description String
+  quantity    Int     @default(1)
+  unitPrice   Float
+  totalPrice  Float
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@map("invoice_items")
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  invoiceId     String
+  amount        Float
+  currency      String        @default("USD")
+  method        PaymentMethod
+  status        PaymentStatus @default(PENDING)
+  transactionId String?
+  paidAt        DateTime?
+  createdAt     DateTime      @default(now())
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id])
+
+  @@map("payments")
+}
+
+// Notifications
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String?
+  type      NotificationType
+  title     String
+  message   String
+  isRead    Boolean          @default(false)
+  data      Json?            // Additional notification data
+  createdAt DateTime         @default(now())
+
+  @@map("notifications")
+}
+
+// Audit logging
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  resource  String
+  resourceId String?
+  oldValues Json?
+  newValues Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@map("audit_logs")
+}
+
+// Enums
+enum UserRole {
+  ADMIN
+  MANAGER
+  STAFF
+  CUSTOMER
+}
+
+enum ServiceCategory {
+  AIR_FREIGHT
+  SEA_FREIGHT
+  ROAD_TRANSPORT
+  CUSTOMS_CLEARANCE
+  WAREHOUSING
+  CONSULTANCY
+}
+
+enum ShipmentStatus {
+  PENDING
+  CONFIRMED
+  IN_TRANSIT
+  CUSTOMS_CLEARANCE
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum DocumentType {
+  INVOICE
+  PACKING_LIST
+  BILL_OF_LADING
+  CUSTOMS_DECLARATION
+  INSURANCE_CERTIFICATE
+  OTHER
+}
+
+enum QuoteStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXPIRED
+  CONVERTED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  BANK_TRANSFER
+  PAYPAL
+  STRIPE
+  CASH
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum NotificationType {
+  SHIPMENT_UPDATE
+  PAYMENT_RECEIVED
+  INVOICE_DUE
+  QUOTE_APPROVED
+  SYSTEM_ALERT
+}
+
+// Package tracking system
+model Package {
+  id              String        @id @default(cuid())
+  trackingNumber  String        @unique
+  invoiceId       String?
+  customerId      String
+  assignedToId    String?       // Staff member assigned to handle this package
+  status          PackageStatus @default(REGISTERED)
+  origin          String
+  destination     String
+  weight          Float?
+  dimensions      Json?         // {length, width, height}
+  value           Float?
+  currency        String        @default("USD")
+  description     String?
+  specialInstructions String?
+  estimatedDelivery DateTime?
+  actualDelivery  DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  // Relations
+  invoice     Invoice?        @relation(fields: [invoiceId], references: [id])
+  customer    Customer        @relation(fields: [customerId], references: [id])
+  assignedTo  User?           @relation("PackageAssignedTo", fields: [assignedToId], references: [id])
+  trackingEvents TrackingEvent[]
+
+  @@map("packages")
+}
+
+// Package tracking events
+model TrackingEvent {
+  id          String   @id @default(cuid())
+  packageId   String
+  status      PackageStatus
+  location    String?
+  description String?
+  timestamp   DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  package Package @relation(fields: [packageId], references: [id], onDelete: Cascade)
+
+  @@map("tracking_events")
+}
+
+// Newsletter subscription system
+model NewsletterSubscriber {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String?
+  isActive    Boolean  @default(true)
+  source      String?  // Where they subscribed from
+  preferences Json?    // Email preferences
+  subscribedAt DateTime @default(now())
+  unsubscribedAt DateTime?
+
+  @@map("newsletter_subscribers")
+}
+
+// Contact form submissions
+model ContactInquiry {
+  id        String            @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  subject   String
+  message   String
+  type      ContactType       @default(GENERAL)
+  status    InquiryStatus     @default(PENDING)
+  priority  InquiryPriority   @default(NORMAL)
+  assignedTo String?
+  response  String?
+  respondedAt DateTime?
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  @@map("contact_inquiries")
+}
+
+// Quote request system
+model QuoteRequest {
+  id                String            @id @default(cuid())
+  fullName          String
+  email             String
+  phone             String
+  company           String?
+  serviceType       String
+  origin            String
+  destination       String
+  shipmentDate      DateTime?
+  cargoType         String
+  cargoDetails      String
+  dimensions        String?
+  weight            String?
+  specialRequirements String?
+  additionalServices Json?           // Array of additional services
+  estimatedValue    Float?
+  currency          String            @default("USD")
+  status            QuoteRequestStatus @default(PENDING)
+  quotedAmount      Float?
+  validUntil        DateTime?
+  notes             String?
+  assignedTo        String?
+  respondedAt       DateTime?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@map("quote_requests")
+}
+
+// Email queue for reliable delivery
+model EmailQueue {
+  id          String      @id @default(cuid())
+  to          String
+  subject     String
+  htmlContent String
+  textContent String?
+  templateName String?
+  templateData Json?
+  status      EmailStatus @default(PENDING)
+  attempts    Int         @default(0)
+  maxAttempts Int         @default(3)
+  lastError   String?
+  sentAt      DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@map("email_queue")
+}
+
+// Additional enums
+enum ContactType {
+  GENERAL
+  QUOTE
+  SUPPORT
+  COMPLAINT
+  PARTNERSHIP
+}
+
+enum InquiryStatus {
+  PENDING
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum InquiryPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum QuoteRequestStatus {
+  PENDING
+  QUOTED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum EmailStatus {
+  PENDING
+  SENT
+  FAILED
+  CANCELLED
+}
+
+
+
+enum PackageStatus {
+  REGISTERED
+  IN_TRANSIT
+  OUT_FOR_DELIVERY
+  DELIVERED
+  RETURNED
+  LOST
+}
+
+enum ShipmentType {
+  AIR_FREIGHT
+  SEA_FREIGHT
+  GROUND_TRANSPORT
+  EXPRESS_DELIVERY
+}
