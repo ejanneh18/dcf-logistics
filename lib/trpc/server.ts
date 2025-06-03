@@ -4,7 +4,6 @@ import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { UserRole } from '@prisma/client'
 import superjson from 'superjson'
-import { headers } from 'next/headers'
 
 export const createTRPCContext = async () => {
   const session = await getServerSession(authOptions)
@@ -12,7 +11,7 @@ export const createTRPCContext = async () => {
   return {
     db,
     session,
-    headers: headers(),
+    headers: null, // Simplified for build compatibility
   }
 }
 

@@ -5,6 +5,10 @@ import { StripeService } from '@/lib/payment/stripe'
 import { db } from '@/lib/db'
 import { z } from 'zod'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 const createIntentSchema = z.object({
   invoiceId: z.string(),
   amount: z.number().positive(),
@@ -130,7 +134,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Payment intent creation error:', error)
-    
+
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: 'Invalid request data', details: error.errors },

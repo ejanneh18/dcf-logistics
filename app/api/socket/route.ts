@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { wsManager } from '@/lib/websocket/server'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 // This endpoint provides WebSocket connection info
 export async function GET(request: NextRequest) {
   try {

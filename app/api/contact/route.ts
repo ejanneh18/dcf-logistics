@@ -4,6 +4,10 @@ import { prisma } from '@/lib/prisma'
 import { EmailService } from '@/lib/email/service'
 import { rateLimit } from '@/lib/rate-limit'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 // Validation schema
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').max(100, 'Name too long'),
@@ -26,7 +30,7 @@ export async function POST(request: NextRequest) {
     // Rate limiting
     const ip = request.ip ?? 'anonymous'
     const { success } = await limiter.check(3, ip)
-    
+
     if (!success) {
       return NextResponse.json(
         { error: 'Too many contact requests. Please wait before submitting again.' },
@@ -42,9 +46,9 @@ export async function POST(request: NextRequest) {
     let priority: 'LOW' | 'NORMAL' | 'HIGH' | 'URGENT' = 'NORMAL'
     const urgentKeywords = ['urgent', 'emergency', 'asap', 'immediate']
     const highKeywords = ['complaint', 'problem', 'issue', 'delay']
-    
+
     const messageText = `${validatedData.subject} ${validatedData.message}`.toLowerCase()
-    
+
     if (urgentKeywords.some(keyword => messageText.includes(keyword))) {
       priority = 'URGENT'
     } else if (validatedData.type === 'COMPLAINT' || highKeywords.some(keyword => messageText.includes(keyword))) {
@@ -111,8 +115,8 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { 
-          error: 'Invalid input data', 
+        {
+          error: 'Invalid input data',
           details: error.errors.map(err => ({
             field: err.path.join('.'),
             message: err.message,

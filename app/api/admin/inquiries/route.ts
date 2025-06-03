@@ -4,10 +4,14 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { EmailService } from '@/lib/email/service'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 // Admin authentication check
 async function checkAdminAuth(request: NextRequest) {
   const session = await getServerSession(authOptions)
-  
+
   if (!session || !session.user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
@@ -164,23 +168,23 @@ export async function PATCH(request: NextRequest) {
           html: `
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #1f2937;">Response to Your Inquiry</h2>
-              
+
               <p>Dear ${inquiry.name},</p>
-              
+
               <p>Thank you for contacting DCF Logistics. We have reviewed your inquiry and here is our response:</p>
-              
+
               <div style="background-color: #f9fafb; border-left: 4px solid #3b82f6; padding: 16px; margin: 20px 0;">
                 <h3 style="margin: 0 0 10px 0; color: #1f2937;">Your Original Message:</h3>
                 <p style="margin: 0; color: #6b7280;">${inquiry.message}</p>
               </div>
-              
+
               <div style="background-color: #ecfdf5; border-left: 4px solid #10b981; padding: 16px; margin: 20px 0;">
                 <h3 style="margin: 0 0 10px 0; color: #1f2937;">Our Response:</h3>
                 <p style="margin: 0; color: #374151; white-space: pre-wrap;">${response}</p>
               </div>
-              
+
               <p>If you have any additional questions, please don't hesitate to contact us.</p>
-              
+
               <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
                 <p style="margin: 0; color: #6b7280; font-size: 14px;">
                   Best regards,<br>

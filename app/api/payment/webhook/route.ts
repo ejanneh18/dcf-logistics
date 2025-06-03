@@ -4,6 +4,10 @@ import { db } from '@/lib/db'
 import { PaymentStatus, InvoiceStatus } from '@prisma/client'
 import Stripe from 'stripe'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.text()

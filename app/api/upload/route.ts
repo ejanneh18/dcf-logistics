@@ -4,6 +4,10 @@ import { authOptions } from '@/lib/auth'
 import { FileUploadService } from '@/lib/upload/config'
 import { db } from '@/lib/db'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: NextRequest) {
   try {
     // Check authentication
@@ -68,7 +72,7 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error('Upload error:', error)
-    
+
     if (error instanceof Error) {
       return NextResponse.json(
         { error: error.message },

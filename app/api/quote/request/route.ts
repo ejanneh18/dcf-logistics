@@ -4,6 +4,10 @@ import { prisma } from '@/lib/prisma'
 import { EmailService } from '@/lib/email/service'
 import { rateLimit } from '@/lib/rate-limit'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 // Validation schema
 const quoteRequestSchema = z.object({
   fullName: z.string().min(2, 'Full name must be at least 2 characters').max(100),
@@ -35,7 +39,7 @@ export async function POST(request: NextRequest) {
     // Rate limiting
     const ip = request.ip ?? 'anonymous'
     const { success } = await limiter.check(2, ip)
-    
+
     if (!success) {
       return NextResponse.json(
         { error: 'Too many quote requests. Please wait before submitting another request.' },
@@ -57,12 +61,12 @@ export async function POST(request: NextRequest) {
 
     let estimatedQuote: number | undefined
     const baseRate = baseRates[validatedData.serviceType as keyof typeof baseRates]
-    
+
     if (baseRate && validatedData.weight) {
       const weightNum = parseFloat(validatedData.weight.replace(/[^\d.]/g, ''))
       if (!isNaN(weightNum)) {
         estimatedQuote = baseRate * weightNum
-        
+
         // Add surcharges for additional services
         if (validatedData.additionalServices.includes('Insurance')) {
           estimatedQuote *= 1.05
@@ -163,8 +167,8 @@ export async function POST(request: NextRequest) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { 
-          error: 'Invalid input data', 
+        {
+          error: 'Invalid input data',
           details: error.errors.map(err => ({
             field: err.path.join('.'),
             message: err.message,

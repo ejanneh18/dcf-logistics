@@ -4,6 +4,10 @@ import { prisma } from '@/lib/prisma'
 import { EmailService } from '@/lib/email/service'
 import { rateLimit } from '@/lib/rate-limit'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 // Validation schema
 const subscribeSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -22,7 +26,7 @@ export async function POST(request: NextRequest) {
     // Rate limiting
     const ip = request.ip ?? 'anonymous'
     const { success } = await limiter.check(5, ip)
-    
+
     if (!success) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },

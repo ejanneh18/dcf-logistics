@@ -3,6 +3,10 @@ import { type NextRequest } from 'next/server'
 import { appRouter } from '@/lib/trpc/root'
 import { createTRPCContext } from '@/lib/trpc/server'
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 const handler = (req: NextRequest) =>
   fetchRequestHandler({
     endpoint: '/api/trpc',

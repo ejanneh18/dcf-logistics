@@ -1,6 +1,10 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getContextualAIResponse, type ChatMessage } from "@/components/chat/contextual-ai-service"
 
+// Required for Next.js 15 App Router
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 // Store conversation history in memory (in production, use a database)
 const conversationHistory: Record<string, ChatMessage[]> = {}
 
