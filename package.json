@@ -12,18 +12,7 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "db:studio": "prisma studio",
-    "build:godaddy": "npm run clean && cp deployment/godaddy/next.config.production.mjs next.config.mjs && npm run build && npm run optimize:godaddy",
-    "build:portable": "node deployment/portable/build-package.js",
-    "deploy:godaddy": "node deployment/godaddy/scripts/deploy-godaddy.js",
-    "deploy:test": "node deployment/godaddy/scripts/test-deployment.js",
-    "deploy:rollback": "node deployment/godaddy/scripts/rollback.js",
-    "optimize:godaddy": "npm run compress:images && npm run minify:css",
-    "compress:images": "node deployment/godaddy/scripts/compress-images.js",
-    "minify:css": "node deployment/godaddy/scripts/minify-css.js",
-    "build:cpanel": "node deployment/cpanel/deploy-cpanel.js",
-    "build:static": "node -e \"require('fs').copyFileSync('deployment/cpanel/next.config.static.mjs', 'next.config.mjs')\" && npm run build",
-    "deploy:cpanel": "npm run build:cpanel"
+    "db:studio": "prisma studio"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -119,13 +108,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "archiver": "^7.0.1",
-    "basic-ftp": "^5.0.5",
-    "imagemin": "^8.0.1",
-    "imagemin-mozjpeg": "^10.0.0",
-    "imagemin-pngquant": "^9.0.2",
     "postcss": "^8",
-    "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }
