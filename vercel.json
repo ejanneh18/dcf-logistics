@@ -9,8 +9,6 @@
   "installCommand": "npm ci",
   "devCommand": "npm run dev",
   "env": {
-    "NEXTAUTH_URL": "@nextauth_url",
-    "NEXTAUTH_SECRET": "@nextauth_secret",
     "DATABASE_URL": "@database_url",
     "SENDGRID_API_KEY": "@sendgrid_api_key",
     "SENDGRID_FROM_EMAIL": "@sendgrid_from_email",
