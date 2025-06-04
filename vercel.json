@@ -9,23 +9,6 @@
   "installCommand": "npm ci",
   "devCommand": "npm run dev",
   "env": {
-    "DATABASE_URL": "@database_url",
-    "SENDGRID_API_KEY": "@sendgrid_api_key",
-    "SENDGRID_FROM_EMAIL": "@sendgrid_from_email",
-    "SENDGRID_FROM_NAME": "@sendgrid_from_name",
-    "CONTACT_EMAIL": "@contact_email",
-    "SALES_EMAIL": "@sales_email",
-    "ADMIN_EMAIL": "@admin_email",
-    "APP_URL": "@app_url",
-    "STRIPE_SECRET_KEY": "@stripe_secret_key",
-    "STRIPE_PUBLISHABLE_KEY": "@stripe_publishable_key",
-    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret",
-    "CLOUDINARY_CLOUD_NAME": "@cloudinary_cloud_name",
-    "CLOUDINARY_API_KEY": "@cloudinary_api_key",
-    "CLOUDINARY_API_SECRET": "@cloudinary_api_secret",
-    "TWILIO_ACCOUNT_SID": "@twilio_account_sid",
-    "TWILIO_AUTH_TOKEN": "@twilio_auth_token",
-    "TWILIO_PHONE_NUMBER": "@twilio_phone_number"
   },
   "build": {
     "env": {
