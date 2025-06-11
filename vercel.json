@@ -8,6 +8,7 @@
   "outputDirectory": ".next",
   "installCommand": "npm ci",
   "devCommand": "npm run dev",
+  "postinstall": "prisma generate",
   "env": {
   },
   "build": {
