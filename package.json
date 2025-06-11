@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build && next export",
+    "build": "prisma generate && next build",
+    "build:static": "prisma generate && next build",
     "dev": "next dev",
     "start": "next start",
+    "export": "next export",
     "lint": "next lint",
     "clean": "rimraf .next && rimraf out && rimraf dist-package",
     "fresh": "npm run clean && npm install && npm run build",

@@ -107,8 +107,9 @@ export async function GET(request: NextRequest) {
       stats: statsObj
     })
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to fetch inquiries:', error)
+    console.error('Error stack:', error.stack)
     return NextResponse.json(
       { error: 'Failed to fetch inquiries' },
       { status: 500 }
@@ -207,8 +208,9 @@ export async function PATCH(request: NextRequest) {
       inquiry: updatedInquiry
     })
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to update inquiry:', error)
+    console.error('Error stack:', error.stack)
     return NextResponse.json(
       { error: 'Failed to update inquiry' },
       { status: 500 }
@@ -245,8 +247,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ inquiry })
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to fetch inquiry details:', error)
+    console.error('Error stack:', error.stack)
     return NextResponse.json(
       { error: 'Failed to fetch inquiry details' },
       { status: 500 }

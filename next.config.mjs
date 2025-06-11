@@ -9,6 +9,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  env: Object.keys(process.env)
+    .filter(key => key.startsWith('NEXT_PUBLIC_'))
+    .reduce((obj, key) => {
+      obj[key] = process.env[key];
+      return obj;
+    }, {}),
 }
 
 export default nextConfig
