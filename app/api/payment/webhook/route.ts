@@ -6,7 +6,6 @@ import Stripe from 'stripe'
 
 // Required for Next.js 15 App Router
 export const runtime = 'nodejs'
-export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {
