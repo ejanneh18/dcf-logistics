@@ -17,4 +17,6 @@ const nextConfig = {
     }, {}),
 }
 
+nextConfig.output = 'export';
+
 export default nextConfig
