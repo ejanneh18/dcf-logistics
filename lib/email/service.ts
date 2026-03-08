@@ -128,7 +128,7 @@ export class EmailService {
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
           <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <img src="https://dcflogistics.com/logo.png" alt="DCF Logistics" style="height: 40px;">
+              <img src="https://dcflogistics.gm/logo.png" alt="DCF Logistics" style="height: 40px;">
             </div>
 
             <h1 style="color: #007cba; text-align: center;">Password Reset Request</h1>
@@ -149,7 +149,7 @@ export class EmailService {
 
             <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
             <p style="font-size: 12px; color: #666; text-align: center;">
-              DCF Logistics | Banjul, The Gambia | +220 123 4567
+              DCF Logistics | Serekunda, The Gambia | +220 395 1020
             </p>
           </div>
         </body>
@@ -246,7 +246,7 @@ export class EmailService {
       const html = await render(ContactNotificationEmail(data))
 
       const emailOptions: EmailOptions = {
-        to: process.env.CONTACT_EMAIL || 'info@dcflogistics.com',
+        to: process.env.CONTACT_EMAIL || 'info@dcfagency.com',
         subject: `New ${data.type} inquiry from ${data.name} - ${data.subject}`,
         html,
         text: `New ${data.type} inquiry from ${data.name} (${data.email}): ${data.message}`,
@@ -309,7 +309,7 @@ export class EmailService {
         </head>
         <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
           <div style="text-align: center; margin-bottom: 30px;">
-            <img src="https://dcflogistics.com/logo.png" alt="DCF Logistics" style="height: 40px;">
+            <img src="https://dcflogistics.gm/logo.png" alt="DCF Logistics" style="height: 40px;">
           </div>
 
           <h1 style="color: #007cba; text-align: center;">${data.subject}</h1>
@@ -325,7 +325,7 @@ export class EmailService {
           <p style="font-size: 12px; color: #666; text-align: center;">
             You're receiving this email because you subscribed to DCF Logistics newsletter.<br>
             <a href="${data.unsubscribeUrl}" style="color: #007cba;">Unsubscribe</a> |
-            DCF Logistics | Banjul, The Gambia | +220 123 4567
+            DCF Logistics | Serekunda, The Gambia | +220 395 1020
           </p>
         </body>
         </html>

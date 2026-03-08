@@ -71,39 +71,51 @@ export default function QuoteRequestForm() {
     setIsSubmitting(true)
 
     try {
-      const payload = {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phone,
-        company: formData.company || undefined,
-        serviceType: formData.serviceType,
-        origin: formData.origin,
-        destination: formData.destination,
-        shipmentDate: formData.shipmentDate?.toISOString(),
-        cargoType: formData.cargoType,
-        cargoDetails: formData.cargoDetails,
-        dimensions: formData.dimensions || undefined,
-        weight: formData.weight || undefined,
-        specialRequirements: formData.specialRequirements || undefined,
-        additionalServices: formData.additionalServices,
-        estimatedValue: formData.estimatedValue ? parseFloat(formData.estimatedValue) : undefined,
-        currency: "USD",
-      }
+      // For static export, use mailto functionality
+      const subject = `Quote Request - ${formData.serviceType}`
+      const body = `Quote Request Details:
 
-      const response = await fetch('/api/quote/request', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
+Contact Information:
+- Name: ${formData.fullName}
+- Email: ${formData.email}
+- Phone: ${formData.phone}
+- Company: ${formData.company || 'Not provided'}
 
-      const data = await response.json()
+Service Details:
+- Service Type: ${formData.serviceType}
+- Origin: ${formData.origin}
+- Destination: ${formData.destination}
+- Shipment Date: ${formData.shipmentDate ? format(formData.shipmentDate, "PPP") : 'Not specified'}
 
-      if (response.ok) {
+Cargo Information:
+- Cargo Type: ${formData.cargoType}
+- Description: ${formData.cargoDetails}
+- Dimensions: ${formData.dimensions || 'Not specified'}
+- Weight: ${formData.weight || 'Not specified'}
+- Estimated Value: ${formData.estimatedValue ? `$${formData.estimatedValue} USD` : 'Not specified'}
+
+Additional Services:
+${formData.additionalServices.length > 0 ? formData.additionalServices.map(service => `- ${service}`).join('\n') : '- None selected'}
+
+Special Requirements:
+${formData.specialRequirements || 'None'}
+
+Please provide a detailed quote for the above requirements.`
+
+      // Create mailto link
+      const mailtoLink = `mailto:info@dcfagency.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
+      // Open email client
+      window.open(mailtoLink, '_blank')
+
+      // Generate a mock quote ID
+      const mockQuoteId = `DCF-${Date.now().toString().slice(-6)}`
+
+      // Simulate success after a short delay
+      setTimeout(() => {
         setIsSubmitted(true)
-        setQuoteId(data.quoteId)
-        toast.success(data.message || "Quote request submitted successfully!")
+        setQuoteId(mockQuoteId)
+        toast.success("Email client opened! Please send the email to receive your quote.")
 
         // Reset form
         setFormData({
@@ -123,13 +135,12 @@ export default function QuoteRequestForm() {
           additionalServices: [],
           estimatedValue: "",
         })
-      } else {
-        toast.error(data.error || "Failed to submit quote request. Please try again.")
-      }
+        setIsSubmitting(false)
+      }, 1000)
+
     } catch (error) {
       console.error('Quote request error:', error)
-      toast.error("Failed to submit quote request. Please check your connection and try again.")
-    } finally {
+      toast.error("Failed to open email client. Please try again or contact us directly.")
       setIsSubmitting(false)
     }
   }
@@ -168,8 +179,8 @@ export default function QuoteRequestForm() {
           <div className="space-y-3">
             <p className="text-sm text-gray-600">
               For urgent requests, please call us at{' '}
-              <a href="tel:+2201234567" className="text-primary font-semibold hover:underline">
-                +220 123 4567
+              <a href="tel:+2203951020" className="text-primary font-semibold hover:underline">
+                +220 395 1020
               </a>
             </p>
 

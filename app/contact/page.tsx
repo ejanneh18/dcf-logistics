@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ContactForm } from "@/components/contact-form"
+import EnhancedContactForm from "@/components/enhanced-contact-form"
 import { MapPin, Phone, Mail, Clock, Truck, MessageSquare, CheckCircle } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -36,9 +36,9 @@ export default function ContactPage() {
               </div>
               <h3 className="text-xl font-bold mb-3">Our Location</h3>
               <p className="text-gray-600 mb-4">
-                123 Logistics Avenue
+                IC PLAZA Cooperative Junction Westfield
                 <br />
-                Banjul, Gambia
+               SereKunda The Gambia.
               </p>
               <Button variant="outline" size="sm" asChild>
                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
@@ -55,12 +55,12 @@ export default function ContactPage() {
               <p className="text-gray-600 mb-4">
                 Customer Service:
                 <br />
-                <a href="tel:+2201234567" className="text-primary hover:underline">
-                  +220 123 456 789
+                <a href="tel:+2203951020" className="text-primary hover:underline">
+                  +220 395 1020
                 </a>
               </p>
               <Button variant="outline" size="sm" asChild>
-                <a href="tel:+2201234567">Call Now</a>
+                <a href="tel:+2203951020">Call Now</a>
               </Button>
             </Card>
 
@@ -72,12 +72,12 @@ export default function ContactPage() {
               <p className="text-gray-600 mb-4">
                 General Inquiries:
                 <br />
-                <a href="mailto:info@dcflogistics.com" className="text-primary hover:underline">
-                  info@dcflogistics.com
+                <a href="mailto:info@dcfagency.com" className="text-primary hover:underline">
+                  info@dcfagency.com
                 </a>
               </p>
               <Button variant="outline" size="sm" asChild>
-                <a href="mailto:info@dcflogistics.com">Email Us</a>
+                <a href="mailto:info@dcfagency.com">Email Us</a>
               </Button>
             </Card>
           </div>
@@ -98,15 +98,15 @@ export default function ContactPage() {
               </TabsList>
 
               <TabsContent value="general">
-                <ContactForm type="general" />
+                <EnhancedContactForm defaultType="GENERAL" />
               </TabsContent>
 
               <TabsContent value="quote">
-                <ContactForm type="quote" />
+                <EnhancedContactForm defaultType="QUOTE" />
               </TabsContent>
 
               <TabsContent value="support">
-                <ContactForm type="support" />
+                <EnhancedContactForm defaultType="SUPPORT" />
               </TabsContent>
             </Tabs>
           </div>
@@ -125,18 +125,18 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                     <p className="text-gray-600">
-                      123 Logistics Avenue
+                      IC PLAZA Cooperative Junction Westfield
                       <br />
-                      Banjul, Gambia
+                      SereKunda The Gambia
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <Phone className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <p className="text-gray-600">+220 123 456 789</p>
+                    <p className="text-gray-600">+220 3951020</p>
                   </div>
                   <div className="flex items-start gap-3">
                     <Mail className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <p className="text-gray-600">banjul@dcflogistics.com</p>
+                    <p className="text-gray-600">info@dcfagency.com</p>
                   </div>
                 </div>
               </CardContent>
@@ -160,7 +160,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-start gap-3">
                     <Mail className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <p className="text-gray-600">dakar@dcflogistics.com</p>
+                    <p className="text-gray-600">dakar@dcflogistics.gm</p>
                   </div>
                 </div>
               </CardContent>
@@ -184,7 +184,7 @@ export default function ContactPage() {
                   </div>
                   <div className="flex items-start gap-3">
                     <Mail className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                    <p className="text-gray-600">freetown@dcflogistics.com</p>
+                    <p className="text-gray-600">freetown@dcflogistics.gm</p>
                   </div>
                 </div>
               </CardContent>
@@ -320,7 +320,7 @@ export default function ContactPage() {
                 Get a Quote
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10" asChild>
+            <Button size="lg" variant="secondary" className="text-black border-white " asChild>
               <Link href="/tracking">Track Shipment</Link>
             </Button>
           </div>

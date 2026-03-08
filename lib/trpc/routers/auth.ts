@@ -3,6 +3,8 @@ import { createTRPCRouter, publicProcedure, protectedProcedure, staffProcedure }
 import bcrypt from 'bcryptjs'
 import { TRPCError } from '@trpc/server'
 import { UserRole } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
+import { Session } from 'next-auth'
 import { EmailService } from '@/lib/email/service'
 
 const registerSchema = z.object({
@@ -28,8 +30,40 @@ const updateProfileSchema = z.object({
 export const authRouter = createTRPCRouter({
   register: publicProcedure
     .input(registerSchema)
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ ctx, input }): Promise<any> => {
       const { name, email, password, role, companyName, phone } = input
+
+      if (!ctx.req) {
+        console.error('Could not access request object')
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Could not access request object',
+        })
+      }
+
+      const ip = ctx.req.headers['x-forwarded-for'] || ctx.req.socket.remoteAddress
+
+      if (typeof ip !== 'string') {
+        console.error('Could not determine IP address')
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Could not determine IP address',
+        })
+      }
+
+      const registerRateLimit = rateLimit({
+        uniqueTokenPerInterval: 500,
+        interval: 60 * 60 * 1000, // 1 hour
+      })
+
+      const rateLimitResult = await registerRateLimit.check(3, ip)
+
+      if (!rateLimitResult.success) {
+        throw new TRPCError({
+          code: 'TOO_MANY_REQUESTS',
+          message: `Too many accounts created from this IP. Please try again in an hour.`,
+        })
+      }
 
       // Check if user already exists
       const existingUser = await ctx.db.user.findUnique({
@@ -99,7 +133,7 @@ export const authRouter = createTRPCRouter({
         })
       }
 
-      const { password: _, ...userWithoutPassword } = user
+      const { password, ...userWithoutPassword } = user
       return userWithoutPassword
     }),
 
@@ -229,3 +263,7 @@ export const authRouter = createTRPCRouter({
       return userWithoutPassword
     }),
 })
+
+function rateLimit(arg0: { uniqueTokenPerInterval: number; interval: number }) {
+  throw new Error('Function not implemented.')
+}

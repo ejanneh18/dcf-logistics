@@ -1,60 +1,84 @@
 # DCF Logistics - Deployment Guide
 
-## 🚀 Production Deployment Tutorial
+## � **CRITICAL: GoDaddy Hosting Issues Identified**
 
-### Prerequisites
-- Node.js 18+ installed
-- PostgreSQL database (for production)
-- Domain name and hosting provider
-- Email service (SMTP or service like SendGrid)
-- Stripe account (for payments)
-- Cloudinary account (for file uploads)
+### **Current Problem Analysis**
+The DCF Logistics website is experiencing deployment issues on GoDaddy shared hosting due to:
 
-### 1. Environment Setup
+1. **Server-Side Dependencies**: The codebase contains API routes and server-side code incompatible with shared hosting
+2. **Static Export Conflicts**: Remaining tRPC, Prisma, and NextAuth dependencies prevent proper static generation
+3. **Hosting Limitations**: GoDaddy shared hosting only supports static files (HTML, CSS, JS) - no Node.js runtime
 
-#### Production Environment Variables
-Create a `.env.production` file:
+### **Immediate Solution: Migration to Vercel (Recommended)**
+
+## 🚀 **Vercel Deployment (Primary Recommendation)**
+
+Vercel is the optimal hosting platform for Next.js applications, offering:
+- ✅ **Native Next.js Support**: Built by the Next.js team
+- ✅ **Automatic Deployments**: Git-based CI/CD
+- ✅ **Edge Functions**: Server-side functionality support
+- ✅ **Global CDN**: Fast worldwide performance
+- ✅ **Free Tier**: Generous limits for small to medium projects
+- ✅ **Custom Domains**: Easy domain configuration
+- ✅ **Environment Variables**: Secure configuration management
+
+### **Quick Vercel Deployment Steps**
+
+#### 1. Prepare Repository
+```bash
+# Ensure your code is pushed to GitHub
+git add .
+git commit -m "Prepare for Vercel deployment"
+git push origin main
+```
+
+#### 2. Deploy to Vercel
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy (follow prompts)
+vercel
+
+# For production deployment
+vercel --prod
+```
+
+#### 3. Configure Environment Variables
+In Vercel Dashboard → Project Settings → Environment Variables:
 
 ```bash
-# Database (PostgreSQL for production)
-DATABASE_URL="postgresql://username:password@host:5432/dcf_logistics"
+# Core Application
+NEXTAUTH_URL=https://your-vercel-domain.vercel.app
+NEXTAUTH_SECRET=your-super-secure-secret-key-here
 
-# NextAuth.js
-NEXTAUTH_SECRET="your-super-secure-secret-key-here"
-NEXTAUTH_URL="https://yourdomain.com"
+# Database (use external service)
+DATABASE_URL=postgresql://username:password@host:5432/dcf_logistics
 
-# Email Configuration (Production SMTP)
-SMTP_HOST="smtp.youremailprovider.com"
-SMTP_PORT="587"
-SMTP_USER="noreply@yourdomain.com"
-SMTP_PASS="your-email-password"
-SMTP_FROM="noreply@yourdomain.com"
+# Email Configuration
+SMTP_HOST=smtp.youremailprovider.com
+SMTP_PORT=587
+SMTP_USER=noreply@yourdomain.com
+SMTP_PASS=your-email-password
+SMTP_FROM=noreply@yourdomain.com
 
-# Contact and Admin Emails
-CONTACT_EMAIL="info@yourdomain.com"
-SALES_EMAIL="sales@yourdomain.com"
-ADMIN_EMAIL="admin@yourdomain.com"
+# Contact Information
+CONTACT_EMAIL=info@yourdomain.com
+SALES_EMAIL=sales@yourdomain.com
+ADMIN_EMAIL=admin@yourdomain.com
 
 # App Configuration
-APP_URL="https://yourdomain.com"
-
-# Production flags
-EMAIL_QUEUE_ENABLED="true"
-RATE_LIMIT_ENABLED="true"
+APP_URL=https://your-vercel-domain.vercel.app
 
 # Stripe (for payments)
-STRIPE_PUBLISHABLE_KEY="pk_live_..."
-STRIPE_SECRET_KEY="sk_live_..."
-STRIPE_WEBHOOK_SECRET="whsec_..."
+STRIPE_PUBLISHABLE_KEY=pk_live_...
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
 
 # Cloudinary (for file uploads)
-CLOUDINARY_CLOUD_NAME="your-cloud-name"
-CLOUDINARY_API_KEY="your-api-key"
-CLOUDINARY_API_SECRET="your-api-secret"
-
-# AI Chat (optional)
-GEMINI_API_KEY="your-gemini-api-key"
-OPENAI_API_KEY="your-openai-api-key"
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
 ```
 
 ### 2. Database Setup

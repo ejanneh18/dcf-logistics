@@ -48,7 +48,7 @@ export const QuoteResponseEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://dcflogistics.com/logo.png"
+            src="https://dcflogistics.gm/logo.png"
             width="120"
             height="40"
             alt="DCF Logistics"
@@ -133,10 +133,10 @@ export const QuoteResponseEmail = ({
         </Section>
         
         <Section style={buttonContainer}>
-          <Button style={acceptButton} href={`https://dcflogistics.com/quote/accept/${quoteId}`}>
+          <Button style={acceptButton} href={`https://dcflogistics.gm/quote/accept/${quoteId}`}>
             Accept Quote
           </Button>
-          <Button style={contactButton} href="https://dcflogistics.com/contact">
+          <Button style={contactButton} href="https://dcflogistics.gm/contact">
             Contact Us
           </Button>
         </Section>
@@ -153,20 +153,20 @@ export const QuoteResponseEmail = ({
         <Text style={text}>
           Best regards,<br />
           The DCF Logistics Sales Team<br />
-          Phone: +220 123 4567<br />
-          Email: quotes@dcflogistics.com
+          Phone: +220 395 1020<br />
+          Email: info@dcfagency.com
         </Text>
         
         <Section style={footer}>
           <Text style={footerText}>
-            DCF Logistics | Banjul, The Gambia | +220 123 4567
+            DCF Logistics | Serekunda, The Gambia | +220 395 1020
           </Text>
           <Text style={footerText}>
-            <Link href="https://dcflogistics.com" style={footerLink}>
+            <Link href="https://dcflogistics.gm" style={footerLink}>
               Visit our website
             </Link>{' '}
             |{' '}
-            <Link href="https://dcflogistics.com/services" style={footerLink}>
+            <Link href="https://dcflogistics.gm/services" style={footerLink}>
               Our services
             </Link>
           </Text>

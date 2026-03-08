@@ -1,8 +1,9 @@
+import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Facebook, Twitter, Instagram, Linkedin, Mail } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { FooterNewsletterSignup } from "@/components/newsletter-signup"
 
 export default function Footer() {
   return (
@@ -113,16 +114,16 @@ export default function Footer() {
                   Compare Services
                 </Link>
               </li>
-              <li>
-                <Link href="/account/login" className="text-gray-400 hover:text-primary">
-                  Client Login
+              {/* <li>
+                <Link href="/calculator" className="text-gray-400 hover:text-primary">
+                  Calculator
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link href="/account/register" className="text-gray-400 hover:text-primary">
                   Register
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/about" className="text-gray-400 hover:text-primary">
                   About Us
@@ -139,30 +140,20 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-4 text-white">Newsletter</h3>
             <p className="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates and offers.</p>
-            <div className="flex gap-2">
-              <Input
-                type="email"
-                placeholder="Your email"
-                className="bg-gray-800 border-gray-700 text-white placeholder:text-gray-500"
-              />
-              <Button>
-                <Mail className="h-4 w-4 mr-2" />
-                Subscribe
-              </Button>
-            </div>
+            <FooterNewsletterSignup />
             <div className="mt-6">
               <h4 className="font-semibold mb-2 text-white">Contact</h4>
               <address className="text-gray-400 not-italic">
-                Banjul Port Area
+                IC PLAZA Cooperative Junction Westfield
                 <br />
-                Banjul, The Gambia
+                Serekunda, The Gambia
                 <br />
-                <a href="tel:+2201234567" className="hover:text-primary">
-                  +220 123 456 789
+                <a href="tel:+2203951020" className="hover:text-primary">
+                  +220 3951020
                 </a>
                 <br />
-                <a href="mailto:info@dcflogistics.gm" className="hover:text-primary">
-                  info@dcflogistics.gm
+                <a href="mailto:info@dcfagency.com" className="hover:text-primary">
+                  info@dcfagency.com
                 </a>
               </address>
             </div>

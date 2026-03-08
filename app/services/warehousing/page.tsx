@@ -57,7 +57,7 @@ export default function WarehousingPage() {
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage: "url('/placeholder.svg?height=800&width=1600')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1553413077-190dd305871c?w=1600&h=800&fit=crop&q=80')",
             backgroundBlendMode: "overlay",
           }}
         ></div>
@@ -120,7 +120,7 @@ export default function WarehousingPage() {
             </div>
             <div className="relative rounded-xl overflow-hidden shadow-xl">
               <img
-                src="/placeholder.svg?height=600&width=800"
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop&q=80"
                 alt="Modern warehouse facility"
                 className="w-full h-auto"
               />
@@ -331,7 +331,7 @@ export default function WarehousingPage() {
             <div className="bg-gray-50 rounded-xl overflow-hidden">
               <div className="h-64 overflow-hidden">
                 <img
-                  src="/placeholder.svg?height=400&width=600"
+                  src="https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=600&h=400&fit=crop&q=80"
                   alt="Banjul warehouse facility"
                   className="w-full h-full object-cover"
                 />
@@ -362,7 +362,7 @@ export default function WarehousingPage() {
             <div className="bg-gray-50 rounded-xl overflow-hidden">
               <div className="h-64 overflow-hidden">
                 <img
-                  src="/placeholder.svg?height=400&width=600"
+                  src="https://images.unsplash.com/photo-1565891741441-64926e441838?w=600&h=400&fit=crop&q=80"
                   alt="Accra warehouse facility"
                   className="w-full h-full object-cover"
                 />

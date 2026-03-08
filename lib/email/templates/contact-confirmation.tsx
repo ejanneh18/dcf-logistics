@@ -36,7 +36,7 @@ export const ContactConfirmationEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://dcflogistics.com/logo.png"
+            src="https://dcflogistics.gm/logo.png"
             width="120"
             height="40"
             alt="DCF Logistics"
@@ -78,21 +78,21 @@ export const ContactConfirmationEmail = ({
         </Text>
         
         <ul style={actionsList}>
-          <li>Track your shipments using our <Link href="https://dcflogistics.com/tracking" style={link}>tracking system</Link></li>
-          <li>Browse our <Link href="https://dcflogistics.com/services" style={link}>logistics services</Link></li>
-          <li>Read our <Link href="https://dcflogistics.com/blog" style={link}>industry insights</Link></li>
-          <li>Call us directly at +220 123 4567 for urgent matters</li>
+          <li>Track your shipments using our <Link href="https://dcflogistics.gm/tracking" style={link}>tracking system</Link></li>
+          <li>Browse our <Link href="https://dcflogistics.gm/services" style={link}>logistics services</Link></li>
+          <li>Read our <Link href="https://dcflogistics.gm/blog" style={link}>industry insights</Link></li>
+          <li>Call us directly at +220 395 1020 for urgent matters</li>
         </ul>
         
         <Section style={buttonContainer}>
-          <Button style={button} href="https://dcflogistics.com/account/login">
+          <Button style={button} href="https://dcflogistics.gm/account/login">
             Access Your Account
           </Button>
         </Section>
         
         <Text style={text}>
           If you have any urgent questions or need immediate assistance, please don't hesitate to call our 
-          customer service team at +220 123 4567.
+          customer service team at +220 395 1020.
         </Text>
         
         <Text style={text}>
@@ -102,14 +102,14 @@ export const ContactConfirmationEmail = ({
         
         <Section style={footer}>
           <Text style={footerText}>
-            DCF Logistics | Banjul, The Gambia | +220 123 4567
+            DCF Logistics | Serekunda, The Gambia | +220 395 1020
           </Text>
           <Text style={footerText}>
-            <Link href="https://dcflogistics.com" style={footerLink}>
+            <Link href="https://dcflogistics.gm" style={footerLink}>
               Visit our website
             </Link>{' '}
             |{' '}
-            <Link href="https://dcflogistics.com/contact" style={footerLink}>
+            <Link href="https://dcflogistics.gm/contact" style={footerLink}>
               Contact us
             </Link>
           </Text>

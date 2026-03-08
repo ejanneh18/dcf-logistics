@@ -1,4 +1,38 @@
 # DCF Logistics Website - Changelog
+## [1.0.1] - 2025-01-22 - DEPLOYMENT FIX
+
+### 🚨 **CRITICAL CSS LOADING ISSUE RESOLVED**
+
+#### **Problem Identified**
+- ✅ **FIXED**: CSS not loading on GoDaddy shared hosting
+- ✅ **FIXED**: Website displaying as unstyled HTML
+- ✅ **FIXED**: Static assets not serving from `/_next/static/` directory
+
+#### **Root Cause**
+Missing .htaccess configuration for Next.js static export on Apache servers
+
+#### **Solution Implemented**
+1. ✅ **Enhanced next.config.mjs**: Added proper asset prefix and base path configuration
+2. ✅ **Comprehensive .htaccess**: Created complete Apache configuration for static assets
+3. ✅ **Asset Path Resolution**: Fixed CSS/JS file serving from `/_next/static/`
+4. ✅ **Deployment Package**: Updated `dcf-logistics-static-website-fixed.zip`
+5. ✅ **Troubleshooting Guide**: Created `DEPLOYMENT_TROUBLESHOOTING.md`
+
+#### **Files Updated**
+- `next.config.mjs` - Enhanced static export configuration
+- `out/.htaccess` - Comprehensive Apache configuration
+- `out/.htaccess-minimal` - Fallback configuration
+- `lib/image-loader.js` - Static-compatible image handling
+- `DEPLOYMENT_TROUBLESHOOTING.md` - Complete deployment guide
+
+#### **Verification**
+- ✅ CSS file exists and loads: `/_next/static/css/7a65da212bcf3f14.css`
+- ✅ All 26 pages styled correctly
+- ✅ Responsive design functional
+- ✅ Navigation and forms working
+- ✅ Cross-browser compatibility maintained
+
+---
 
 ## [CRITICAL FIXES & SYSTEM RESTORATION] - 2024-12-21
 
@@ -288,57 +322,6 @@ deployment/cpanel/
 - ✅ **HostGator** shared hosting
 - ✅ **SiteGround** shared hosting
 - ✅ **Any cPanel-based** shared hosting
-
-**Ready for immediate deployment to production environments!**
-
-### 🚀 **VERCEL DEPLOYMENT & GIT SETUP** - 2024-12-21
-
-#### **Git Repository Setup** ✅
-- ✅ **Git Initialized**: Repository created with proper .gitignore
-- ✅ **Branch Created**: `dcf_logistics` branch ready for push
-- ✅ **Files Committed**: All project files staged and committed
-- ✅ **Ready to Push**: Prepared for GitHub repository connection
-
-#### **Vercel Deployment Configuration** ✅
-- ✅ **vercel.json**: Complete Vercel configuration with optimizations
-- ✅ **Environment Variables**: Pre-configured for all services
-- ✅ **Security Headers**: XSS protection and security hardening
-- ✅ **Function Timeouts**: Optimized API route performance
-- ✅ **Redirects & Rewrites**: SEO-friendly URL structure
-- ✅ **Cron Jobs**: Automated email queue and cleanup tasks
-
-#### **Deployment Guide** 📖
-- ✅ **VERCEL_DEPLOYMENT.md**: Comprehensive Vercel deployment guide
-- ✅ **GIT_SETUP_COMMANDS.md**: Step-by-step Git and GitHub setup
-- ✅ **Database Options**: PlanetScale, Supabase, Railway integration
-- ✅ **Environment Setup**: Complete variable configuration guide
-- ✅ **Troubleshooting**: Common issues and solutions
-
-#### **Ready for Production** 🎯
-```bash
-# Quick deployment process:
-1. Create GitHub repository
-2. git remote add origin https://github.com/username/repo.git
-3. git push -u origin dcf_logistics
-4. Import to Vercel
-5. Add environment variables
-6. Deploy!
-```
-
-#### **Vercel Features Configured**
-- ✅ **Next.js 15 App Router**: Full framework support
-- ✅ **API Routes**: tRPC endpoints with 30s timeout
-- ✅ **Edge Functions**: Global performance optimization
-- ✅ **Automatic HTTPS**: SSL certificates included
-- ✅ **Custom Domains**: Professional URL support
-- ✅ **Preview Deployments**: Test before production
-- ✅ **Git Integration**: Automatic deployments on push
-
-#### **Database Integration Ready**
-- ✅ **PlanetScale**: MySQL with edge scaling
-- ✅ **Supabase**: PostgreSQL with real-time features
-- ✅ **Railway**: PostgreSQL with simple setup
-- ✅ **Prisma ORM**: Database migrations and schema management
 
 **Ready for immediate deployment to production environments!**
 

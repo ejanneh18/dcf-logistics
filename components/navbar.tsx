@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -14,10 +14,12 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Search, User } from "lucide-react"
+import { Menu, Search } from "lucide-react"
+import SearchModal from "@/components/search-modal"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
@@ -64,13 +66,7 @@ export default function Navbar() {
                   Get a Quote
                 </Link>
 
-                <Link
-                  href="/blog"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium transition-colors hover:text-primary"
-                >
-                  Blog
-                </Link>
+
                 <Link
                   href="/about"
                   onClick={() => setIsOpen(false)}
@@ -79,19 +75,20 @@ export default function Navbar() {
                   About
                 </Link>
                 <Link
+                  href="/support"
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg font-medium transition-colors hover:text-primary"
+                >
+                  Support
+                </Link>
+                <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}
                   className="text-lg font-medium transition-colors hover:text-primary"
                 >
                   Contact
                 </Link>
-                <Link
-                  href="/account/login"
-                  onClick={() => setIsOpen(false)}
-                  className="text-lg font-medium transition-colors hover:text-primary"
-                >
-                  Login
-                </Link>
+
               </nav>
             </SheetContent>
           </Sheet>
@@ -103,9 +100,9 @@ export default function Navbar() {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Home</NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/" className={navigationMenuTriggerStyle()}>Home</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Services</NavigationMenuTrigger>
@@ -232,49 +229,54 @@ export default function Navbar() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/tracking" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Tracking</NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/tracking" className={navigationMenuTriggerStyle()}>Tracking</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/quote" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Get a Quote</NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/quote" className={navigationMenuTriggerStyle()}>Get a Quote</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
 
+
               <NavigationMenuItem>
-                <Link href="/blog" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Blog</NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/support" className={navigationMenuTriggerStyle()}>Support</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/about" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>About</NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/about" className={navigationMenuTriggerStyle()}>About</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/contact" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>Contact</NavigationMenuLink>
-                </Link>
+                <NavigationMenuLink asChild>
+                  <Link href="/contact" className={navigationMenuTriggerStyle()}>Contact</Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
         </div>
 
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="hidden md:flex">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden md:flex"
+            onClick={() => setIsSearchOpen(true)}
+          >
             <Search className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" asChild>
-            <Link href="/account/login">
-              <User className="h-5 w-5" />
-            </Link>
-          </Button>
+
           <Button className="hidden md:inline-flex" asChild>
             <Link href="/quote">Get a Quote</Link>
           </Button>
         </div>
       </div>
+
+      {/* Search Modal */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </header>
   )
 }

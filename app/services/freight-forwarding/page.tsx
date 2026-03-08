@@ -57,7 +57,7 @@ export default function FreightForwardingPage() {
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage: "url('/placeholder.svg?height=800&width=1600')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=1600&h=800&fit=crop&q=80')",
             backgroundBlendMode: "overlay",
           }}
         ></div>
@@ -118,7 +118,7 @@ export default function FreightForwardingPage() {
             </div>
             <div className="relative rounded-xl overflow-hidden shadow-xl">
               <img
-                src="/placeholder.svg?height=600&width=800"
+                src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&h=600&fit=crop&q=80"
                 alt="Freight forwarding operations"
                 className="w-full h-auto"
               />

@@ -17,7 +17,7 @@ export default function SitemapPage() {
         { name: "Home", href: "/" },
         { name: "About Us", href: "/about" },
         { name: "Contact Us", href: "/contact" },
-        { name: "Blog", href: "/blog" },
+
         { name: "Features", href: "/features" },
         { name: "Support", href: "/support" },
       ],
@@ -47,18 +47,7 @@ export default function SitemapPage() {
         { name: "Tracking Results", href: "/tracking/results" },
       ],
     },
-    {
-      title: "Account & Admin",
-      links: [
-        { name: "Login", href: "/account/login" },
-        { name: "Register", href: "/account/register" },
-        { name: "Dashboard", href: "/account/dashboard" },
-        { name: "Admin Dashboard", href: "/admin/dashboard" },
-        { name: "Admin Invoicing", href: "/admin/invoicing" },
-        { name: "Admin Analytics", href: "/admin/analytics" },
-        { name: "Admin Settings", href: "/admin/settings" },
-      ],
-    },
+
     {
       title: "Legal & Policies",
       links: [

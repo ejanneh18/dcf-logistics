@@ -52,7 +52,7 @@ export default function ServiceContactForm({ service }: ServiceContactFormProps)
 
           <div className="space-y-2">
             <Label htmlFor="phone">Phone Number</Label>
-            <Input id="phone" placeholder="+220 123 456 789" />
+            <Input id="phone" placeholder="+220 395 1020" />
           </div>
 
           <div className="space-y-2">

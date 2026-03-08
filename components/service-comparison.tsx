@@ -26,7 +26,7 @@ const serviceFeatures = {
       { name: "Consolidation Services", included: true },
     ],
     bestFor: ["International shipments", "Complex logistics chains", "Multiple transport modes"],
-    startingPrice: "$500",
+    startingPrice: "Contact for Quote",
   },
   "customs-brokerage": {
     name: "Customs Brokerage",
@@ -44,7 +44,7 @@ const serviceFeatures = {
       { name: "Consolidation Services", included: false },
     ],
     bestFor: ["Import/export businesses", "Regulatory compliance", "Duty optimization"],
-    startingPrice: "$200",
+    startingPrice: "Contact for Quote",
   },
   warehousing: {
     name: "Warehousing",
@@ -62,7 +62,7 @@ const serviceFeatures = {
       { name: "Consolidation Services", included: true },
     ],
     bestFor: ["Inventory management", "Distribution centers", "Order fulfillment"],
-    startingPrice: "$300",
+    startingPrice: "Contact for Quote",
   },
   "air-freight": {
     name: "Air Freight",
@@ -80,7 +80,7 @@ const serviceFeatures = {
       { name: "Consolidation Services", included: true },
     ],
     bestFor: ["Urgent shipments", "High-value goods", "Perishable items"],
-    startingPrice: "$800",
+    startingPrice: "Contact for Quote",
   },
   "sea-freight": {
     name: "Sea Freight",
@@ -98,7 +98,7 @@ const serviceFeatures = {
       { name: "Consolidation Services", included: true },
     ],
     bestFor: ["Large shipments", "Cost-sensitive cargo", "Non-urgent deliveries"],
-    startingPrice: "$600",
+    startingPrice: "Contact for Quote",
   },
   "road-freight": {
     name: "Road Freight",
@@ -116,7 +116,7 @@ const serviceFeatures = {
       { name: "Consolidation Services", included: true },
     ],
     bestFor: ["Domestic shipments", "Door-to-door delivery", "Flexible scheduling"],
-    startingPrice: "$300",
+    startingPrice: "Contact for Quote",
   },
 }
 

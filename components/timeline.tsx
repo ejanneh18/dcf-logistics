@@ -7,7 +7,7 @@ const timelineData = [
     description:
       "DCF Logistics was established in Banjul with a vision to modernize The Gambia's clearing and forwarding industry.",
     imageUrl:
-      "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
+      "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
   },
   {
     year: "2015",
@@ -15,7 +15,7 @@ const timelineData = [
     description:
       "Pioneered digital documentation and online tracking systems in The Gambia, becoming the first fully digitized clearing and forwarding agency in the country.",
     imageUrl:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
+      "https://images.unsplash.com/photo-1592963218849-a477763212b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
   },
   {
     year: "2018",
@@ -23,7 +23,7 @@ const timelineData = [
     description:
       "Expanded operations to serve clients across ECOWAS region, establishing partnerships in Senegal, Guinea-Bissau, and Mali for seamless cross-border logistics.",
     imageUrl:
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
+      "https://images.unsplash.com/photo-1605902711834-8b11c3e3ef2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
   },
   {
     year: "2022",
@@ -31,7 +31,7 @@ const timelineData = [
     description:
       "Launched AI-powered logistics platform and real-time cargo tracking, setting new standards for logistics technology in West Africa.",
     imageUrl:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
   },
   {
     year: "Today",
@@ -39,7 +39,7 @@ const timelineData = [
     description:
       "Today, DCF Logistics stands as The Gambia's premier logistics company, handling over 1000 shipments annually and serving as the trusted partner for businesses across West Africa.",
     imageUrl:
-      "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
+      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300&q=80",
   },
 ];
 

@@ -1,12 +1,16 @@
+import type { Metadata } from "next"
 import HeroSection from "@/components/hero-section"
 import ServiceCard from "@/components/service-card"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { StatsSection } from "@/components/stats-section"
-import { ChatWidget } from "@/components/chat/chat-widget"
-import { NewsletterSignup } from "@/components/newsletter-signup"
 import { Plane, Truck, FileCheck, Warehouse, Ship, Scale, Users, Globe } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+
+export const metadata: Metadata = {
+  title: "DCF Logistics | Premier Clearing & Forwarding Services in The Gambia",
+  description: "DCF Logistics offers comprehensive clearing and forwarding services across West Africa. Air freight, sea freight, customs clearance, and logistics solutions.",
+}
 
 export default function HomePage() {
   return (
@@ -16,7 +20,7 @@ export default function HomePage() {
         <HeroSection />
 
         {/* Services Section */}
-        <section className="py-16 md:py-24 bg-gray-50">
+        <section className="py-6 md:py-10 bg-gray-50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-4 mb-12">
               <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Our Services</div>
@@ -77,33 +81,30 @@ export default function HomePage() {
         <StatsSection />
         <TestimonialsSection />
 
-        {/* Newsletter Section */}
-        <section className="py-16 md:py-24 bg-gray-50">
+        {/* Contact CTA Section */}
+        <section className="py-6 md:py-10 bg-gray-50">
           <div className="container px-4 md:px-6">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl mb-4">
-                  Stay Informed with Industry Insights
-                </h2>
-                <p className="text-gray-500 md:text-lg max-w-2xl mx-auto">
-                  Subscribe to our newsletter for the latest logistics trends, shipping tips,
-                  and updates on our services. Join thousands of logistics professionals.
-                </p>
-              </div>
-
-              <div className="flex justify-center">
-                <NewsletterSignup
-                  variant="default"
-                  source="homepage"
-                  className="max-w-lg"
-                />
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl font-bold tracking-tighter md:text-4xl mb-4">
+                Ready to Get Started?
+              </h2>
+              <p className="text-gray-500 md:text-lg max-w-2xl mx-auto mb-8">
+                Contact us today for a personalized quote or to learn more about our comprehensive logistics services.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <Link href="/quote">Get a Quote</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/contact">Contact Us</Link>
+                </Button>
               </div>
             </div>
           </div>
         </section>
 
         {/* Why Choose DCF Section */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="py-6 md:py-10 bg-white">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center text-center space-y-4 mb-12">
               <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Why Choose DCF</div>
@@ -159,17 +160,16 @@ export default function HomePage() {
               Experience the difference of working with a truly local logistics partner who understands your needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="text-white" asChild>
+              <Button size="lg" variant="secondary" className="text-black" asChild>
                 <Link href="/quote">Get a Quote</Link>
               </Button>
-              <Button size="lg" variant="secondary" className="text-white" asChild>
+              <Button size="lg" variant="secondary" className="text-black" asChild>
                 <Link href="/contact">Contact Us</Link>
               </Button>
             </div>
           </div>
         </section>
       </main>
-      <ChatWidget />
     </div>
   )
 }

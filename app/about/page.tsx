@@ -2,36 +2,125 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Globe, Users, Award, Clock, TrendingUp, CheckCircle, MapPin, Ship, Truck } from "lucide-react"
-import Timeline from "@/components/timeline"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import {
+  Globe,
+  Users,
+  Award,
+  Clock,
+  TrendingUp,
+  CheckCircle2,
+  MapPin,
+  Ship,
+  Truck,
+  Plane,
+  Target,
+  Eye,
+  Heart,
+  Star,
+  Shield,
+  Phone,
+  Mail,
+  Linkedin
+} from "lucide-react"
 
 export const metadata: Metadata = {
   title: "About Us | DCF Logistics",
-  description: "Learn about DCF Logistics, The Gambia's premier digital clearing and forwarding agency",
+  description: "Learn about DCF Logistics, The Gambia's premier digital clearing and forwarding agency transforming logistics across West Africa since 2010.",
 }
+
+const stats = [
+  { label: "Years of Experience", value: "14+", icon: Clock },
+  { label: "Successful Shipments", value: "50K+", icon: Ship },
+  { label: "Happy Clients", value: "2,500+", icon: Users },
+  { label: "Countries Served", value: "25+", icon: Globe },
+]
+
+const values = [
+  {
+    icon: Target,
+    title: "Excellence",
+    description: "We strive for excellence in every shipment, ensuring your cargo reaches its destination safely and on time."
+  },
+  {
+    icon: Shield,
+    title: "Reliability",
+    description: "Our proven track record and robust systems ensure consistent, dependable logistics solutions."
+  },
+  {
+    icon: Heart,
+    title: "Customer Focus",
+    description: "Your success is our priority. We build lasting relationships through exceptional service."
+  },
+  {
+    icon: TrendingUp,
+    title: "Innovation",
+    description: "We embrace technology and innovation to provide cutting-edge logistics solutions."
+  }
+]
+
+const milestones = [
+  { year: "2010", title: "Company Founded", description: "DCF Logistics established in Banjul, The Gambia" },
+  { year: "2013", title: "Regional Expansion", description: "Extended services across West Africa" },
+  { year: "2016", title: "Digital Transformation", description: "Launched online tracking and digital documentation" },
+  { year: "2019", title: "ISO Certification", description: "Achieved ISO 9001:2015 quality management certification" },
+  { year: "2022", title: "Technology Leadership", description: "Implemented AI-powered logistics optimization" },
+  { year: "2024", title: "Sustainable Future", description: "Launched green logistics and carbon-neutral shipping options" }
+]
 
 export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary/90 to-primary py-20 text-white">
-        <div className="container mx-auto px-4">
+      <section className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 py-20 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6">
+            <div className="mb-8">
               <Image
                 src="/images/logo_dcf.png"
                 alt="DCF Logistics"
-                width={200}
-                height={80}
+                width={250}
+                height={100}
                 className="mx-auto brightness-0 invert"
               />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About DCF Logistics</h1>
-            <p className="text-xl mb-8">
-              The Gambia's pioneering digital clearing and forwarding agency, transforming logistics across West Africa
-              since 2010.
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+              About DCF Logistics
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto leading-relaxed">
+              The Gambia's pioneering digital clearing and forwarding agency, transforming logistics across West Africa since 2010.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" variant="secondary" className="text-primary">
+                Our Services
+              </Button>
+              <Button size="lg" variant="outline" className="border-white text-primary hover:bg-white hover:text-primary">
+                Contact Us
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon
+              return (
+                <div key={index} className="text-center">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
+                  <div className="text-gray-600 font-medium">{stat.label}</div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -63,7 +152,7 @@ export default function AboutPage() {
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="/images/container_img.png"
                 alt="Banjul Port - Gateway to West Africa"
                 className="object-cover w-full h-full"
               />
@@ -81,7 +170,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src="/images/vis_mis.png"
                 alt="Modern container operations"
                 className="object-cover w-full h-full"
               />
@@ -170,11 +259,35 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Company Journey */}
-      <section className="py-16 bg-gray-50">
+      {/* Timeline */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">Our Journey</h2>
-          <Timeline />
+          <div className="text-center mb-16">
+            <Badge className="mb-4">Our Journey</Badge>
+            <h2 className="text-4xl font-bold mb-6">Key Milestones</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              From humble beginnings to regional leadership, discover the key moments that shaped DCF Logistics.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/20"></div>
+
+              {milestones.map((milestone, index) => (
+                <div key={index} className="relative flex items-start mb-12 last:mb-0">
+                  <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm z-10">
+                    {milestone.year}
+                  </div>
+                  <div className="ml-8 flex-1">
+                    <h3 className="text-xl font-semibold mb-2">{milestone.title}</h3>
+                    <p className="text-gray-600">{milestone.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -187,16 +300,16 @@ export default function AboutPage() {
             <Card className="overflow-hidden">
               <div className="relative h-64">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400&q=80"
+                  src="/images/Musa.jpg"
                   alt="CEO"
                   className="object-cover w-full h-full"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-1">Amadou Jallow</h3>
+                <h3 className="text-xl font-bold mb-1">Musa Camara</h3>
                 <p className="text-primary font-medium mb-4">Chief Executive Officer & Founder</p>
                 <p className="text-gray-600 mb-4">
-                  A visionary leader with over 15 years in West African logistics. Amadou founded DCF with the mission
+                  A visionary leader with over 15 years in West African logistics. Musa founded DCF with the mission
                   to transform The Gambia's logistics landscape through technology and innovation.
                 </p>
                 <div className="flex space-x-3">
@@ -207,21 +320,22 @@ export default function AboutPage() {
                 </div>
               </CardContent>
             </Card>
+            
 
             {/* COO */}
             <Card className="overflow-hidden">
               <div className="relative h-64">
                 <img
-                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400&q=80"
-                  alt="COO"
+                  src="/images/MariamJawara.jpeg"
+                  alt="Mariama Jawara - Chief Operating Officer"
                   className="object-cover w-full h-full"
                 />
               </div>
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-1">Fatou Ceesay</h3>
+                <h3 className="text-xl font-bold mb-1">Mariama Jawara</h3>
                 <p className="text-primary font-medium mb-4">Chief Operations Officer</p>
                 <p className="text-gray-600 mb-4">
-                  Fatou brings extensive experience in port operations and customs procedures. Her deep knowledge of
+                  Mariama Jawara brings extensive experience in port operations and customs procedures. Her deep knowledge of
                   Gambian trade regulations ensures smooth operations for all our clients.
                 </p>
                 <div className="flex space-x-3">
@@ -234,11 +348,11 @@ export default function AboutPage() {
             </Card>
 
             {/* CTO */}
-            <Card className="overflow-hidden">
+            {/* <Card className="overflow-hidden">
               <div className="relative h-64">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400&q=80"
-                  alt="CTO"
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=400&q=80"
+                  alt="Ousman Jatta - Chief Technology Officer"
                   className="object-cover w-full h-full"
                 />
               </div>
@@ -256,7 +370,7 @@ export default function AboutPage() {
                   </Button>
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
           </div>
         </div>
       </section>
@@ -279,7 +393,7 @@ export default function AboutPage() {
 
             <Card className="text-center p-6">
               <div className="mx-auto mb-4 bg-primary/10 p-4 rounded-full inline-block">
-                <CheckCircle className="h-8 w-8 text-primary" />
+                <CheckCircle2 className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-bold mb-3">Integrity</h3>
               <p className="text-gray-600">

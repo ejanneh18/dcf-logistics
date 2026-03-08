@@ -455,12 +455,12 @@ For detailed quotes, complete our quote request form and our team will respond w
     content: `24/7 customer support and multiple contact options for all your logistics needs:
 
 CONTACT METHODS:
-- Phone: +220 123 456 789 (24/7 hotline)
-- Email: info@dcflogistics.com
-- Support Email: support@dcflogistics.com
-- Emergency Line: +220 123 456 HELP
+- Phone: +220 395 1020 (24/7 hotline)
+- Email: info@dcfagency.com
+- Support Email: info@dcfagency.com
+- Emergency Line: +220 395 1020
 - Live Chat: Available on website
-- WhatsApp: +220 123 456 789
+- WhatsApp: +220 395 1020
 
 BUSINESS HOURS:
 - Monday-Friday: 8:00 AM - 6:00 PM EST

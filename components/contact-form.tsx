@@ -38,39 +38,52 @@ export function ContactForm({ type }: ContactFormProps) {
     setIsLoading(true)
 
     try {
-      let endpoint = '/api/contact'
-      let payload: any = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || undefined,
-        company: formData.company || undefined,
-        subject: formData.subject,
-        message: formData.message,
-        type: type.toUpperCase(),
-      }
+      // For static export, use mailto functionality
+      let subject = ''
+      let body = ''
+      let emailTo = 'info@dcfagency.com'
 
-      // Customize payload based on form type
+      // Customize email based on form type
       if (type === 'quote') {
-        payload.subject = `Quote Request - ${formData.service}`
-        payload.message = `Service: ${formData.service}\n\nDetails:\n${formData.message}`
-        payload.type = 'QUOTE'
+        subject = `Quote Request - ${formData.service}`
+        body = `Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Company: ${formData.company}
+Service: ${formData.service}
+
+Shipment Details:
+${formData.message}`
+        emailTo = 'info@dcfagency.com'
       } else if (type === 'support') {
-        payload.subject = `Support Request - ${formData.issueType || 'General'}`
-        payload.message = `Issue Type: ${formData.issueType}\n${formData.trackingNumber ? `Tracking Number: ${formData.trackingNumber}\n` : ''}\nDescription:\n${formData.message}`
-        payload.type = 'SUPPORT'
+        subject = `Support Request - ${formData.issueType || 'General'}`
+        body = `Name: ${formData.name}
+Email: ${formData.email}
+Issue Type: ${formData.issueType}
+${formData.trackingNumber ? `Tracking Number: ${formData.trackingNumber}` : ''}
+
+Issue Description:
+${formData.message}`
+        emailTo = 'info@dcfagency.com'
+      } else {
+        subject = formData.subject || 'General Inquiry'
+        body = `Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Company: ${formData.company}
+
+Message:
+${formData.message}`
       }
 
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
+      // Create mailto link
+      const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 
-      const data = await response.json()
+      // Open email client
+      window.open(mailtoLink, '_blank')
 
-      if (response.ok) {
+      // Simulate success after a short delay
+      setTimeout(() => {
         setIsSubmitted(true)
         setFormData({
           name: '',
@@ -83,14 +96,13 @@ export function ContactForm({ type }: ContactFormProps) {
           issueType: '',
           service: '',
         })
-        toast.success(data.message || 'Message sent successfully!')
-      } else {
-        toast.error(data.error || 'Failed to send message. Please try again.')
-      }
+        toast.success('Email client opened! Please send the email to complete your inquiry.')
+        setIsLoading(false)
+      }, 1000)
+
     } catch (error) {
       console.error('Contact form error:', error)
-      toast.error('Failed to send message. Please check your connection and try again.')
-    } finally {
+      toast.error('Failed to open email client. Please try again or contact us directly.')
       setIsLoading(false)
     }
   }
@@ -104,18 +116,18 @@ export function ContactForm({ type }: ContactFormProps) {
             Message Sent Successfully!
           </h3>
           <p className="text-gray-600 mb-4">
-            Thank you for contacting DCF Logistics. We've received your {type} inquiry 
+            Thank you for contacting DCF Logistics. We've received your {type} inquiry
             and will respond within 24 hours during business days.
           </p>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <p className="text-sm text-green-700">
-              <strong>What's next?</strong> You'll receive a confirmation email shortly. 
-              For urgent matters, please call us at +220 123 4567.
+              <strong>What's next?</strong> You'll receive a confirmation email shortly.
+              For urgent matters, please call us at +220 395 1020.
             </p>
           </div>
-          <Button 
-            onClick={() => setIsSubmitted(false)} 
-            variant="outline" 
+          <Button
+            onClick={() => setIsSubmitted(false)}
+            variant="outline"
             className="mt-4"
           >
             Send Another Message
@@ -184,8 +196,8 @@ export function ContactForm({ type }: ContactFormProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="service">Service Interested In *</Label>
-                <Select 
-                  value={formData.service} 
+                <Select
+                  value={formData.service}
                   onValueChange={(value) => handleInputChange('service', value)}
                   required
                   disabled={isLoading}
@@ -220,8 +232,8 @@ export function ContactForm({ type }: ContactFormProps) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="issueType">Issue Type</Label>
-                <Select 
-                  value={formData.issueType} 
+                <Select
+                  value={formData.issueType}
                   onValueChange={(value) => handleInputChange('issueType', value)}
                   disabled={isLoading}
                 >
@@ -282,8 +294,8 @@ export function ContactForm({ type }: ContactFormProps) {
           {/* Message field */}
           <div className="space-y-2">
             <Label htmlFor="message">
-              {type === 'quote' ? 'Shipment Details *' : 
-               type === 'support' ? 'Issue Description *' : 
+              {type === 'quote' ? 'Shipment Details *' :
+               type === 'support' ? 'Issue Description *' :
                'Message *'}
             </Label>
             <Textarea
@@ -291,7 +303,7 @@ export function ContactForm({ type }: ContactFormProps) {
               value={formData.message}
               onChange={(e) => handleInputChange('message', e.target.value)}
               placeholder={
-                type === 'quote' 
+                type === 'quote'
                   ? 'Please provide details about your shipment (origin, destination, cargo type, weight, dimensions, etc.)'
                   : type === 'support'
                   ? 'Please describe your issue in detail'
@@ -318,8 +330,8 @@ export function ContactForm({ type }: ContactFormProps) {
                 ) : (
                   <Send className="h-4 w-4 mr-2" />
                 )}
-                {type === 'quote' ? 'Request Quote' : 
-                 type === 'support' ? 'Submit Support Request' : 
+                {type === 'quote' ? 'Request Quote' :
+                 type === 'support' ? 'Submit Support Request' :
                  'Send Message'}
               </>
             )}

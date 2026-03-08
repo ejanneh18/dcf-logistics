@@ -3,28 +3,29 @@ import type { Metadata, Viewport } from "next"
 import "./globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
-import { ChatProvider } from "@/components/chat/chat-provider"
-import { ChatWidget } from "@/components/chat/chat-widget"
-import { InstallPrompt } from "@/components/pwa/install-prompt"
-import { PWAStatus } from "@/components/pwa/pwa-status"
-import { SessionProvider } from "@/components/providers/session-provider"
-import { TRPCProvider } from "@/components/providers/trpc-provider"
-import { ProgressProvider } from "@/components/providers/progress-provider"
-import { GlobalProgressBar } from "@/components/ui/global-progress-bar"
+import { StaticAuthProvider } from "@/lib/static-auth"
 import { Toaster } from "@/components/ui/toaster"
 import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import FloatingWidgets from "@/components/floating-widgets"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "DCF Logistics - Digital Clearing and Forwarding Logistics",
-  description: "Professional logistics, clearing, and forwarding services for businesses of all sizes.",
-  keywords: ["logistics", "shipping", "freight", "customs", "clearing", "forwarding"],
+  title: {
+    default: "DCF Logistics - Digital Clearing & Forwarding | The Gambia",
+    template: "%s | DCF Logistics",
+  },
+  description: "DCF Logistics offers professional clearing, forwarding, air & sea freight, customs brokerage, and warehousing services across West Africa. Based in Serekunda, The Gambia.",
+  keywords: ["logistics", "shipping", "freight", "customs clearance", "clearing and forwarding", "air freight", "sea freight", "warehousing", "The Gambia", "West Africa", "DCF Logistics", "customs brokerage", "haulage"],
   authors: [{ name: "DCF Logistics" }],
   creator: "DCF Logistics",
   publisher: "DCF Logistics",
+  metadataBase: new URL("https://dcflogistics.gm"),
+  alternates: {
+    canonical: "/",
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -39,15 +40,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "DCF Logistics",
-    title: "DCF Logistics - Digital Clearing and Forwarding",
-    description: "Professional logistics, clearing, and forwarding services for businesses of all sizes.",
+    title: "DCF Logistics - Digital Clearing & Forwarding | The Gambia",
+    description: "Professional logistics, clearing, forwarding, and freight services across West Africa. Air freight, sea freight, customs brokerage & warehousing.",
+    locale: "en_US",
+    url: "https://dcflogistics.gm",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DCF Logistics - Digital Clearing and Forwarding",
-    description: "Professional logistics, clearing, and forwarding services for businesses of all sizes.",
+    title: "DCF Logistics - Digital Clearing & Forwarding",
+    description: "Professional logistics, clearing, forwarding, and freight services across West Africa.",
   },
-    generator: 'v0.dev'
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  generator: 'v0.dev'
 }
 
 export const viewport: Viewport = {
@@ -68,7 +82,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
@@ -78,51 +92,48 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="DCF Logistics" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="msapplication-TileColor" content="#0070c7" />
-      </head>
-      <body className={inter.className}>
-        <SessionProvider>
-          <TRPCProvider>
-            <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-              <ProgressProvider>
-                <GlobalProgressBar
-                  height={3}
-                  color="#007cba"
-                  showMessage={true}
-                  position="top"
-                />
-                <ChatProvider>
-                  <div className="flex min-h-screen flex-col">
-                    <Navbar />
-                    <main className="flex-1">{children}</main>
-                    <Footer />
-                  </div>
-                  <ChatWidget />
-                  <InstallPrompt />
-                  <PWAStatus />
-                  <Toaster />
-                  <SonnerToaster />
-                </ChatProvider>
-              </ProgressProvider>
-            </ThemeProvider>
-          </TRPCProvider>
-        </SessionProvider>
         <script
+          type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then(function(registration) {
-                      console.log('SW registered: ', registration);
-                    })
-                    .catch(function(registrationError) {
-                      console.log('SW registration failed: ', registrationError);
-                    });
-                });
-              }
-            `,
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "DCF Logistics",
+              url: "https://dcflogistics.gm",
+              logo: "https://dcflogistics.gm/icons/apple-touch-icon.png",
+              description: "Professional clearing, forwarding, and freight logistics services across West Africa.",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "IC PLAZA Cooperative Junction Westfield",
+                addressLocality: "Serekunda",
+                addressCountry: "GM",
+              },
+              telephone: "+220 395 1020",
+              email: "info@dcfagency.com",
+              sameAs: [],
+              areaServed: {
+                "@type": "GeoCircle",
+                geoMidpoint: { "@type": "GeoCoordinates", latitude: 13.4549, longitude: -16.579 },
+                geoRadius: "2000 km",
+              },
+            }),
           }}
         />
+      </head>
+      <body className={inter.className} suppressHydrationWarning>
+        <StaticAuthProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+            <div className="flex min-h-screen flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <FloatingWidgets />
+            <Toaster />
+            <SonnerToaster />
+          </ThemeProvider>
+        </StaticAuthProvider>
+
       </body>
     </html>
   )

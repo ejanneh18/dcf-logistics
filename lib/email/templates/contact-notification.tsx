@@ -42,7 +42,7 @@ export const ContactNotificationEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://dcflogistics.com/logo.png"
+            src="https://dcflogistics.gm/logo.png"
             width="120"
             height="40"
             alt="DCF Logistics"
@@ -102,7 +102,7 @@ export const ContactNotificationEmail = ({
         </Section>
         
         <Section style={buttonContainer}>
-          <Button style={button} href={`https://dcflogistics.com/admin/inquiries/${inquiryId}`}>
+          <Button style={button} href={`https://dcflogistics.gm/admin/inquiries/${inquiryId}`}>
             View in Admin Dashboard
           </Button>
         </Section>
@@ -118,7 +118,7 @@ export const ContactNotificationEmail = ({
                 Call Customer
               </Link>
             )}
-            <Link href="https://dcflogistics.com/admin/inquiries" style={quickActionLink}>
+            <Link href="https://dcflogistics.gm/admin/inquiries" style={quickActionLink}>
               All Inquiries
             </Link>
           </div>

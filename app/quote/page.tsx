@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle, Clock, FileText, Mail, Phone } from "lucide-react"
-import QuoteRequestForm from "@/components/quote-request-form"
+import EnhancedQuoteForm from "@/components/enhanced-quote-form"
 
 export const metadata: Metadata = {
   title: "Request a Quote | DCF Logistics",
@@ -26,12 +26,12 @@ export default function QuotePage() {
 
         <section className="py-16 bg-gray-50">
           <div className="container px-4 md:px-6 mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
-                <QuoteRequestForm />
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+              <div className="lg:col-span-3">
+                <EnhancedQuoteForm />
               </div>
 
-              <div className="space-y-6">
+              <div className="space-y-6 lg:col-span-1">
                 <Card>
                   <CardHeader>
                     <CardTitle>Why Choose Us</CardTitle>
@@ -85,11 +85,11 @@ export default function QuotePage() {
                   <CardContent className="space-y-4">
                     <div className="flex items-center gap-3">
                       <Phone className="h-5 w-5 text-primary" />
-                      <span className="text-gray-600">+220 123 456 789</span>
+                      <span className="text-gray-600">+220 395 1020</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <Mail className="h-5 w-5 text-primary" />
-                      <span className="text-gray-600">quotes@dcflogistics.com</span>
+                      <span className="text-gray-600">info@dcfagency.com</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <Clock className="h-5 w-5 text-primary" />

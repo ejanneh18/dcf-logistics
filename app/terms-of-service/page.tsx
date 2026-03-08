@@ -180,13 +180,13 @@ export default function TermsOfServicePage() {
                   <p className="text-gray-600">
                     <strong>Digital Clearing and Forwarding Agency</strong>
                     <br />
-                    Banjul Port Area
+                    IC PLAZA Cooperative Junction Westfield Serekunda
                     <br />
-                    Banjul, The Gambia
+                    Serekunda, The Gambia
                     <br />
                     Email: legal@dcflogistics.gm
                     <br />
-                    Phone: +220 123 456 789
+                    Phone: +220 395 1020
                   </p>
                 </div>
               </section>

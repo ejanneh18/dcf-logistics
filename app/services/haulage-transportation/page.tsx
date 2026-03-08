@@ -57,7 +57,7 @@ export default function HaulageTransportationPage() {
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage: "url('/placeholder.svg?height=800&width=1600')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1600&h=800&fit=crop&q=80')",
             backgroundBlendMode: "overlay",
           }}
         ></div>
@@ -124,7 +124,7 @@ export default function HaulageTransportationPage() {
             </div>
             <div className="relative rounded-xl overflow-hidden shadow-xl">
               <img
-                src="/placeholder.svg?height=600&width=800"
+                src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=800&h=600&fit=crop&q=80"
                 alt="Haulage and inland water transportation"
                 className="w-full h-auto"
               />

@@ -16,8 +16,8 @@ yarn-error.log*
 # production
 /build
 
-# env files
-.env*
+# env files (keep .env.example files tracked)
+.env
 .env.local
 .env.production
 .env.development.local
@@ -81,7 +81,9 @@ Thumbs.db
 coverage/
 .nyc_output/
 
+# legacy static exports
+/dcf-logistics-static-*
+
 # misc
 *.tgz
 *.tar.gz
-.vercel

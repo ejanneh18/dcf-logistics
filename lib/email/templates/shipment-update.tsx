@@ -52,7 +52,7 @@ export const ShipmentUpdateEmail = ({
   destination,
   estimatedDelivery,
   actualDelivery,
-  trackingUrl = 'https://dcflogistics.com/tracking',
+  trackingUrl = 'https://dcflogistics.gm/tracking',
 }: ShipmentUpdateEmailProps) => (
   <Html>
     <Head />
@@ -61,7 +61,7 @@ export const ShipmentUpdateEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://dcflogistics.com/logo.png"
+            src="https://dcflogistics.gm/logo.png"
             width="120"
             height="40"
             alt="DCF Logistics"
@@ -144,10 +144,10 @@ export const ShipmentUpdateEmail = ({
         
         <Text style={text}>
           For any questions or concerns about your shipment, please contact our customer support team at{' '}
-          <Link href="mailto:support@dcflogistics.com" style={link}>
-            support@dcflogistics.com
+          <Link href="mailto:info@dcfagency.com" style={link}>
+            info@dcfagency.com
           </Link>{' '}
-          or call us at +220 123 4567.
+          or call us at +220 395 1020.
         </Text>
         
         <Text style={text}>
@@ -157,14 +157,14 @@ export const ShipmentUpdateEmail = ({
         
         <Section style={footer}>
           <Text style={footerText}>
-            DCF Logistics | Banjul, The Gambia | +220 123 4567
+            DCF Logistics | Serekunda, The Gambia | +220 395 1020
           </Text>
           <Text style={footerText}>
-            <Link href="https://dcflogistics.com" style={footerLink}>
+            <Link href="https://dcflogistics.gm" style={footerLink}>
               Visit our website
             </Link>{' '}
             |{' '}
-            <Link href="https://dcflogistics.com/contact" style={footerLink}>
+            <Link href="https://dcflogistics.gm/contact" style={footerLink}>
               Contact us
             </Link>
           </Text>

@@ -28,8 +28,8 @@ export const InvoiceEmail = ({
   totalAmount,
   currency = 'USD',
   dueDate,
-  invoiceUrl = 'https://dcflogistics.com/account/invoices',
-  paymentUrl = 'https://dcflogistics.com/payment',
+  invoiceUrl = 'https://dcflogistics.gm/account/invoices',
+  paymentUrl = 'https://dcflogistics.gm/payment',
 }: InvoiceEmailProps) => (
   <Html>
     <Head />
@@ -38,7 +38,7 @@ export const InvoiceEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://dcflogistics.com/logo.png"
+            src="https://dcflogistics.gm/logo.png"
             width="120"
             height="40"
             alt="DCF Logistics"
@@ -108,10 +108,10 @@ export const InvoiceEmail = ({
         <Text style={text}>
           If you have any questions about this invoice or need to discuss payment terms, 
           please contact our billing department at{' '}
-          <Link href="mailto:billing@dcflogistics.com" style={link}>
-            billing@dcflogistics.com
+          <Link href="mailto:info@dcfagency.com" style={link}>
+            info@dcfagency.com
           </Link>{' '}
-          or call us at +220 123 4567.
+          or call us at +220 395 1020.
         </Text>
         
         <Text style={text}>
@@ -121,14 +121,14 @@ export const InvoiceEmail = ({
         
         <Section style={footer}>
           <Text style={footerText}>
-            DCF Logistics | Banjul, The Gambia | +220 123 4567
+            DCF Logistics | Serekunda, The Gambia | +220 395 1020
           </Text>
           <Text style={footerText}>
-            <Link href="https://dcflogistics.com" style={footerLink}>
+            <Link href="https://dcflogistics.gm" style={footerLink}>
               Visit our website
             </Link>{' '}
             |{' '}
-            <Link href="mailto:billing@dcflogistics.com" style={footerLink}>
+            <Link href="mailto:info@dcfagency.com" style={footerLink}>
               Billing support
             </Link>
           </Text>

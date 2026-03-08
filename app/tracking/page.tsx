@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import TrackingForm from "@/components/tracking-form"
+import EnhancedTracking from "@/components/enhanced-tracking"
 import { Package, Search, Truck } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -22,7 +22,7 @@ export default function TrackingPage() {
                 Enter your tracking number to get real-time updates on your shipment's status and location.
               </p>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8">
-                <TrackingForm />
+                <EnhancedTracking />
               </div>
             </div>
           </div>

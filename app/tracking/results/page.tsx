@@ -1,4 +1,7 @@
-import type { Metadata } from "next"
+"use client"
+
+import { useEffect, useState } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,18 +10,14 @@ import TrackingTimeline from "@/components/tracking-timeline"
 import TrackingDetails from "@/components/tracking-details"
 import TrackingForm from "@/components/tracking-form"
 
-export const metadata: Metadata = {
-  title: "Tracking Results | DCF Logistics",
-  description: "View detailed tracking information for your shipment",
-}
+export default function TrackingResultsPage() {
+  const searchParams = useSearchParams()
+  const [trackingNumber, setTrackingNumber] = useState("")
 
-export default async function TrackingResultsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ trackingNumber?: string }>
-}) {
-  const params = await searchParams
-  const trackingNumber = params.trackingNumber || ""
+  useEffect(() => {
+    const number = searchParams.get("trackingNumber") || ""
+    setTrackingNumber(number)
+  }, [searchParams])
 
   // In a real application, you would fetch the tracking data from your API
   // For this demo, we'll use mock data
@@ -101,12 +100,17 @@ export default async function TrackingResultsPage({
   }
 
   // Combine past events and future steps for the timeline
-  const timelineEvents = [...mockTrackingData.events, ...mockTrackingData.nextSteps].sort((a, b) => {
-    // Sort by date (most recent first)
-    const dateA = new Date(a.date.replace("Estimated ", ""))
-    const dateB = new Date(b.date.replace("Estimated ", ""))
-    return dateB.getTime() - dateA.getTime()
-  })
+  const timelineEvents = [...mockTrackingData.events, ...mockTrackingData.nextSteps]
+    .map(event => ({
+      ...event,
+      status: event.status as "completed" | "current" | "upcoming"
+    }))
+    .sort((a, b) => {
+      // Sort by date (most recent first)
+      const dateA = new Date(a.date.replace("Estimated ", ""))
+      const dateB = new Date(b.date.replace("Estimated ", ""))
+      return dateB.getTime() - dateA.getTime()
+    })
 
   return (
     <div className="min-h-screen flex flex-col">

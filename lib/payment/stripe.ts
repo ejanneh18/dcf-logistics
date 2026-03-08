@@ -3,7 +3,7 @@ import Stripe from 'stripe'
 // Initialize Stripe conditionally
 const stripe = process.env.STRIPE_SECRET_KEY
   ? new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2024-06-20',
+      apiVersion: '2025-05-28.basil',
     })
   : null
 
@@ -34,8 +34,13 @@ export class StripeService {
   static async createPaymentIntent(data: CreatePaymentIntentData): Promise<Stripe.PaymentIntent> {
     this.ensureConfigured()
 
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
-      const paymentIntent = await stripe!.paymentIntents.create({
+      const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(data.amount), // Ensure it's an integer
         currency: data.currency.toLowerCase(),
         customer: data.customerId,
@@ -59,8 +64,13 @@ export class StripeService {
   static async createCustomer(data: CreateCustomerData): Promise<Stripe.Customer> {
     this.ensureConfigured()
 
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
-      const customer = await stripe!.customers.create({
+      const customer = await stripe.customers.create({
         email: data.email,
         name: data.name,
         phone: data.phone,
@@ -77,8 +87,13 @@ export class StripeService {
   static async updateCustomer(customerId: string, data: Partial<CreateCustomerData>): Promise<Stripe.Customer> {
     this.ensureConfigured()
 
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
-      const customer = await stripe!.customers.update(customerId, {
+      const customer = await stripe.customers.update(customerId, {
         email: data.email,
         name: data.name,
         phone: data.phone,
@@ -95,8 +110,13 @@ export class StripeService {
   static async retrievePaymentIntent(paymentIntentId: string): Promise<Stripe.PaymentIntent> {
     this.ensureConfigured()
 
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
-      const paymentIntent = await stripe!.paymentIntents.retrieve(paymentIntentId)
+      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
       return paymentIntent
     } catch (error) {
       console.error('Stripe payment intent retrieval error:', error)
@@ -105,6 +125,11 @@ export class StripeService {
   }
 
   static async confirmPaymentIntent(paymentIntentId: string): Promise<Stripe.PaymentIntent> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const paymentIntent = await stripe.paymentIntents.confirm(paymentIntentId)
       return paymentIntent
@@ -115,6 +140,11 @@ export class StripeService {
   }
 
   static async cancelPaymentIntent(paymentIntentId: string): Promise<Stripe.PaymentIntent> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const paymentIntent = await stripe.paymentIntents.cancel(paymentIntentId)
       return paymentIntent
@@ -125,6 +155,11 @@ export class StripeService {
   }
 
   static async createRefund(paymentIntentId: string, amount?: number): Promise<Stripe.Refund> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const refund = await stripe.refunds.create({
         payment_intent: paymentIntentId,
@@ -139,6 +174,11 @@ export class StripeService {
   }
 
   static async listPaymentMethods(customerId: string): Promise<Stripe.PaymentMethod[]> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const paymentMethods = await stripe.paymentMethods.list({
         customer: customerId,
@@ -153,6 +193,11 @@ export class StripeService {
   }
 
   static async createSetupIntent(customerId: string): Promise<Stripe.SetupIntent> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const setupIntent = await stripe.setupIntents.create({
         customer: customerId,
@@ -173,8 +218,13 @@ export class StripeService {
   ): Promise<Stripe.Event> {
     this.ensureConfigured()
 
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
-      const event = stripe!.webhooks.constructEvent(payload, signature, secret)
+      const event = stripe.webhooks.constructEvent(payload, signature, secret)
       return event
     } catch (error) {
       console.error('Stripe webhook verification error:', error)
@@ -183,6 +233,11 @@ export class StripeService {
   }
 
   static async getInvoice(invoiceId: string): Promise<Stripe.Invoice> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const invoice = await stripe.invoices.retrieve(invoiceId)
       return invoice
@@ -197,6 +252,11 @@ export class StripeService {
     description?: string
     metadata?: Record<string, string>
   }): Promise<Stripe.Invoice> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const invoice = await stripe.invoices.create({
         customer: data.customer,
@@ -219,6 +279,11 @@ export class StripeService {
     description?: string
     invoice?: string
   }): Promise<Stripe.InvoiceItem> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const invoiceItem = await stripe.invoiceItems.create({
         customer: data.customer,
@@ -236,6 +301,11 @@ export class StripeService {
   }
 
   static async finalizeInvoice(invoiceId: string): Promise<Stripe.Invoice> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const invoice = await stripe.invoices.finalizeInvoice(invoiceId)
       return invoice
@@ -246,6 +316,11 @@ export class StripeService {
   }
 
   static async sendInvoice(invoiceId: string): Promise<Stripe.Invoice> {
+    if (!stripe) {
+      console.error('Stripe not configured. Please set STRIPE_SECRET_KEY environment variable.')
+      throw new Error('Stripe not configured')
+    }
+
     try {
       const invoice = await stripe.invoices.sendInvoice(invoiceId)
       return invoice

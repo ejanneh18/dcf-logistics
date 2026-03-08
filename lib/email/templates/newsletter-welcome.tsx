@@ -21,7 +21,7 @@ interface NewsletterWelcomeEmailProps {
 export const NewsletterWelcomeEmail = ({
   name,
   email,
-  unsubscribeUrl = 'https://dcflogistics.com/unsubscribe',
+  unsubscribeUrl = 'https://dcflogistics.gm/unsubscribe',
 }: NewsletterWelcomeEmailProps) => (
   <Html>
     <Head />
@@ -30,7 +30,7 @@ export const NewsletterWelcomeEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://dcflogistics.com/logo.png"
+            src="https://dcflogistics.gm/logo.png"
             width="120"
             height="40"
             alt="DCF Logistics"
@@ -65,7 +65,7 @@ export const NewsletterWelcomeEmail = ({
         </Section>
         
         <Section style={buttonContainer}>
-          <Button style={button} href="https://dcflogistics.com/services">
+          <Button style={button} href="https://dcflogistics.gm/services">
             Explore Our Services
           </Button>
         </Section>
@@ -82,10 +82,10 @@ export const NewsletterWelcomeEmail = ({
         
         <Section style={footer}>
           <Text style={footerText}>
-            DCF Logistics | Banjul, The Gambia | +220 123 4567
+            DCF Logistics | Serekunda, The Gambia | +220 395 1020
           </Text>
           <Text style={footerText}>
-            <Link href="https://dcflogistics.com" style={footerLink}>
+            <Link href="https://dcflogistics.gm" style={footerLink}>
               Visit our website
             </Link>{' '}
             |{' '}

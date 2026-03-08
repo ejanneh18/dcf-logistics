@@ -21,7 +21,7 @@ interface WelcomeEmailProps {
 export const WelcomeEmail = ({
   name = 'Customer',
   email,
-  loginUrl = 'https://dcflogistics.com/account/login',
+  loginUrl = 'https://dcflogistics.gm/account/login',
 }: WelcomeEmailProps) => (
   <Html>
     <Head />
@@ -30,7 +30,7 @@ export const WelcomeEmail = ({
       <Container style={container}>
         <Section style={logoContainer}>
           <Img
-            src="https://dcflogistics.com/logo.png"
+            src="https://dcflogistics.gm/logo.png"
             width="120"
             height="40"
             alt="DCF Logistics"
@@ -73,10 +73,10 @@ export const WelcomeEmail = ({
         
         <Text style={text}>
           If you have any questions or need assistance, please don't hesitate to contact our customer support team at{' '}
-          <Link href="mailto:support@dcflogistics.com" style={link}>
-            support@dcflogistics.com
+          <Link href="mailto:info@dcfagency.com" style={link}>
+            info@dcfagency.com
           </Link>{' '}
-          or call us at +220 123 4567.
+          or call us at +220 395 1020.
         </Text>
         
         <Text style={text}>
@@ -86,14 +86,14 @@ export const WelcomeEmail = ({
         
         <Section style={footer}>
           <Text style={footerText}>
-            DCF Logistics | Banjul, The Gambia | +220 123 4567
+            DCF Logistics | Serekunda, The Gambia | +220 395 1020
           </Text>
           <Text style={footerText}>
-            <Link href="https://dcflogistics.com" style={footerLink}>
+            <Link href="https://dcflogistics.gm" style={footerLink}>
               Visit our website
             </Link>{' '}
             |{' '}
-            <Link href="https://dcflogistics.com/contact" style={footerLink}>
+            <Link href="https://dcflogistics.gm/contact" style={footerLink}>
               Contact us
             </Link>
           </Text>

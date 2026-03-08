@@ -54,8 +54,8 @@ export default function HeroSection() {
           <div className="relative">
             <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                alt="Container port operations in Banjul"
+                src="/images/container_img.png"
+                alt="DCF Logistics - Modern container port operations and freight forwarding services in Banjul, The Gambia"
                 className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />

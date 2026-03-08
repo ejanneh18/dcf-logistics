@@ -73,9 +73,9 @@ export default function OfflineClientPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-2 text-sm">
-                <p>📞 +220 123 456 789</p>
-                <p>✉️ info@dcflogistics.com</p>
-                <p>📍 123 Logistics Avenue, Banjul</p>
+                <p>📞 +220 395 1020</p>
+                <p>✉️ info@dcfagency.com</p>
+                <p>📍 IC PLAZA Cooperative Junction Westfield Serekunda</p>
               </div>
             </CardContent>
           </Card>

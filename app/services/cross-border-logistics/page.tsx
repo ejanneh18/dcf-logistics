@@ -57,7 +57,7 @@ export default function CrossBorderLogisticsPage() {
         <div
           className="absolute inset-0 bg-cover bg-center z-0"
           style={{
-            backgroundImage: "url('/placeholder.svg?height=800&width=1600')",
+            backgroundImage: "url('https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=1600&h=800&fit=crop&q=80')",
             backgroundBlendMode: "overlay",
           }}
         ></div>
@@ -118,7 +118,7 @@ export default function CrossBorderLogisticsPage() {
               </div>
             </div>
             <div className="relative rounded-xl overflow-hidden shadow-xl">
-              <img src="/placeholder.svg?height=600&width=800" alt="Cross border logistics" className="w-full h-auto" />
+              <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&h=600&fit=crop&q=80" alt="Cross border logistics" className="w-full h-auto" />
             </div>
           </div>
         </div>

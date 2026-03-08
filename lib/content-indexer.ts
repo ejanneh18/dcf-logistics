@@ -106,10 +106,10 @@ const WEBSITE_CONTENT = {
   contact: {
     title: "Contact Information",
     content: `Contact DCF Logistics for all your shipping needs:
-    - Phone: +1-800-123-4567
-    - Email: info@dcflogistics.com
-    - Support Email: support@dcflogistics.com
-    - Emergency Line: +1-800-123-HELP
+    - Phone: +220 395 1020
+    - Email: info@dcfagency.com
+    - Support Email: info@dcfagency.com
+    - Emergency Line: +220 395 1020
     - Business Hours: Monday-Friday 8AM-6PM EST
     - Weekend Support: Saturday 9AM-2PM EST
     - 24/7 Emergency Support Available

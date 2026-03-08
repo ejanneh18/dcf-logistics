@@ -41,8 +41,8 @@ export function TestimonialsSection() {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold">Sarah Johnson</p>
-                  <p className="text-sm text-gray-500">Operations Director, TechGlobal Inc.</p>
+                  <p className="font-semibold">Comium GM</p>
+                  {/* <p className="text-sm text-gray-500">Operations Director, TechGlobal Inc.</p> */}
                 </div>
               </div>
             </CardContent>
@@ -75,7 +75,7 @@ export function TestimonialsSection() {
                   />
                 </div>
                 <div>
-                  <p className="font-semibold">Dr. Michael Chen</p>
+                  <p className="font-semibold">Customer 2</p>
                   <p className="text-sm text-gray-500">CEO, MediSupply International</p>
                 </div>
               </div>
